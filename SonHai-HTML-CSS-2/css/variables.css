@@ -1,0 +1,15 @@
+:root {
+    /* color */
+    --white: #fff;
+    --white-5: #f7f7f7;
+    --green-10: #c8e2db;
+    --green-40: #4aaa2c;
+    --green-50: #0c8c6c;
+    --red-60: #d34b48;
+    --yellow: #f7bd66;
+    --black-50-opacity-10: rgba(151, 151, 151, 0.2);
+    --black-50-opacity-50: rgba(151, 151, 151, 0.5);
+    --black-100-opacity-50: rgba(0, 0, 0, 0.5);
+    --black-70: #616161;
+    --black-90: #121212;
+}

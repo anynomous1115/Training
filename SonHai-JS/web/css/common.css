@@ -1,0 +1,13 @@
+.heartAnimation {
+    animation: heart 1.3s infinite running;
+}
+
+@keyframes heart {
+    from {
+        font-size: 1rem;
+    }
+
+    to {
+        font-size: 1.1rem;
+    }
+}
