@@ -6,7 +6,10 @@ const getAllCartItem = async () => {
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
-                cartState.push(element)
+                const findProduct = productsState.find(i => i.id == element.id)
+                if (findProduct !== undefined) {
+                    cartState.push(element)
+                }
             })
         })
         .catch((error) => {
@@ -112,9 +115,7 @@ const addToCart = (id) => {
 const totalCartCalculator = () => {
     return cartState.reduce((previousValue, cartItem) => {
         const index = productsState.findIndex(product => product.id == cartItem.id)
-        if (index > -1) {
-            previousValue += cartItem.quantity * productsState[index].currentPrice
-        }
+        previousValue += cartItem.quantity * productsState[index].currentPrice
         return previousValue
     }, 0)
 }

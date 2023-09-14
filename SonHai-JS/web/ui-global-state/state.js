@@ -1,4 +1,4 @@
-var productsState = []
+let productsState = []
 let cartState = []
 
 export {

@@ -115,7 +115,6 @@ const showCart = () => {
             }
         }
     })
-    const filterCart = mapCart.filter(i => i!==undefined)
 
     const result = filterCart.map(value => {
         return ` <div class="cart-item" data-id="${value.id}">
