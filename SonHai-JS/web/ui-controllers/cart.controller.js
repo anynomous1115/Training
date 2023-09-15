@@ -116,7 +116,7 @@ const showCart = () => {
         }
     })
 
-    const result = filterCart.map(value => {
+    const result = mapCart.map(value => {
         return ` <div class="cart-item" data-id="${value.id}">
                     <div class="cart-item-img">
                         <img src="${value.image}" alt="">
