@@ -1,21 +1,21 @@
 import { API_URL } from "../constants/api.js";
 import { cartState, productsState } from "../ui-global-state/state.js"
 
-// const getAllCartItem = async () => {
-//     fetch(`${API_URL}/carts`)
-//         .then(res => res.json())
-//         .then(data => {
-//             data.carts.forEach(element => {
-//                 const findProduct = productsState.find(i => i.id == element.id)
-//                 if (findProduct !== undefined) {
-//                     cartState.push(element)
-//                 }
-//             })
-//         })
-//         .catch((error) => {
-//             console.log(error);
-//         })
-// }
+const getAllCartItem = async () => {
+    fetch(`${API_URL}/carts`)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(element => {
+                const findProduct = productsState.find(i => i.id == element.id)
+                if (findProduct !== undefined) {
+                    cartState.push(element)
+                }
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
 
 const updateQuantityCartItem = (id, num) => {
     const index = cartState.findIndex(i => i.id == id)
@@ -121,7 +121,7 @@ const totalCartCalculator = () => {
 }
 
 export {
-    // getAllCartItem,
+    getAllCartItem,
     addToCart,
     updateQuantityCartItem,
     deleteCartItem,

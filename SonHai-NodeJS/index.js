@@ -11,6 +11,8 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, "public")));
 
 
+
+
 const readFileJson = (pathFile) => {
     return fs.readFile(pathFile, 'utf8', (err, contents) => {
         resolve(contents)
@@ -25,31 +27,44 @@ app.get("/", (req, res) =>
     res.render(__dirname + "/public/index.html")
 );
 
-app.get("/data", (req, res) =>
-    res.sendFile(__dirname + "/db/db.json")
-);
+app.get("/products", async (req, res) => {
+    const dataInJson = await readFileJson(__dirname + "/db/db.json");
+    const dataParse = JSON.parse(dataInJson)
+    res.json(dataParse.products)
+});
+
+app.get("/carts", async (req, res) => {
+    const dataInJson = await readFileJson(__dirname + "/db/db.json");
+    const dataParse = JSON.parse(dataInJson)
+    res.json(dataParse.carts)
+});
 
 app.post("/carts", async (req, res) => {
     const dataInJson = await readFileJson(__dirname + "/db/db.json");
     const dataParse = JSON.parse(dataInJson)
-    dataParse.carts.push(req.body)
-    res.send(writeFileJson(__dirname + "/db/db.json", JSON.stringify(dataParse)))
+    const item = req.body
+    dataParse.carts.push(item)
+    writeFileJson(__dirname + "/db/db.json", JSON.stringify(dataParse))
+    res.json(item)
 })
 
 app.delete("/carts/:id", async (req, res) => {
     const dataInJson = await readFileJson(__dirname + "/db/db.json");
     const dataParse = JSON.parse(dataInJson)
     const index = dataParse.carts.findIndex(i => i.id == req.params.id)
-    dataParse.carts.splice(index, 1)
-    res.send(writeFileJson(__dirname + "/db/db.json", JSON.stringify(dataParse)))
+    const spliceCart = dataParse.carts.splice(index, 1)
+    writeFileJson(__dirname + "/db/db.json", JSON.stringify(dataParse))
+    res.json(spliceCart)
 })
 
 app.put("/carts/:id", async (req, res) => {
     const dataInJson = await readFileJson(__dirname + "/db/db.json");
     const dataParse = JSON.parse(dataInJson)
-    const index = dataParse.carts.findIndex(i => i.id == req.params.id)
-    dataParse.carts[index].quantity = req.body.quantity
-    res.send(writeFileJson(__dirname + "/db/db.json", JSON.stringify(dataParse)))
+    const item = req.body
+    const index = dataParse.carts.findIndex(i => i.id == item.id)
+    dataParse.carts[index].quantity = item.quantity
+    writeFileJson(__dirname + "/db/db.json", JSON.stringify(dataParse))
+    res.json(item)
 
 })
 
