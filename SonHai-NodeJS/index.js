@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // route
 app.get("/", (req, res) =>
-    res.sendFile(__dirname + "/public/index.html")
+    res.render(__dirname + "/public/index.html")
 );
 
 app.get("/data", (req, res) =>
