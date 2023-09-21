@@ -19,13 +19,7 @@ const readFileJson = (pathFile) => {
 const writeFileJson = (pathFile, data) => {
     return fs.writeFile(pathFile, data)
 }
-app.post("/test", async (req, res) => {
-    const dataInJson = await readFileJson(__dirname + "/db/carts.json");
-    const dataParse = JSON.parse(dataInJson)
-    dataParse.carts.push({ "id": "10", "quantity": 1 })
-    console.log(dataParse);
-    res.end(fs.writeFile(__dirname + "/db/carts.json", JSON.stringify(dataParse)))
-})
+
 // route 
 app.get("/", (req, res) =>
     res.render(__dirname + "/public/index.html")
