@@ -65,7 +65,7 @@ const updateQuantityEvent = () => {
 
 const updateQuantityDOM = (id) => {
     const countDOM = document.querySelector(`.count[data-id="${id}"]`)
-    const countValue = cartState.find(i => i.id === id)
+    const countValue = cartState.find(i => i.id == id)
     countDOM.value = countValue.quantity
 
 }

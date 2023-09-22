@@ -2,7 +2,7 @@ import { API_URL } from "../constants/api.js";
 import { cartState, productsState } from "../ui-global-state/state.js"
 
 const getAllCartItem = async () => {
-    fetch(`${API_URL}/carts`)
+    await fetch(`${API_URL}/carts`)
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
@@ -13,14 +13,14 @@ const getAllCartItem = async () => {
             })
         })
         .catch((error) => {
-            console.log(error);
+            console.log("Something went wrong");
         })
 }
 
-const updateQuantityCartItem = (id, num) => {
+const updateQuantityCartItem = async (id, num) => {
     const index = cartState.findIndex(i => i.id == id)
     if (num == 1 || num == -1) {
-        fetch(`${API_URL}/carts/${id}`, {
+        await fetch(`${API_URL}/carts/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -32,11 +32,11 @@ const updateQuantityCartItem = (id, num) => {
 
         })
             .catch((error) => {
-                console.log(error);
+                console.log("Something went wrong");
             })
 
     } else {
-        fetch(`${API_URL}/carts/${id}`, {
+        await fetch(`${API_URL}/carts/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -47,14 +47,14 @@ const updateQuantityCartItem = (id, num) => {
             })
         })
             .catch((error) => {
-                console.log(error);
+                console.log("Something went wrong");
             })
     }
 }
 
-const deleteCartItem = (id) => {
+const deleteCartItem =async (id) => {
     const index = cartState.findIndex(i => i.id == id)
-    fetch(`${API_URL}/carts/${id}`, {
+    await fetch(`${API_URL}/carts/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const deleteCartItem = (id) => {
             cartState.splice(index, 1)
         )
         .catch((error) => {
-            console.log(error);
+            console.log("Something went wrong");
         })
 }
 
@@ -83,7 +83,7 @@ const addToCart = async (id) => {
             })
         })
             .catch((error) => {
-                console.log(error);
+                console.log("Something went wrong");
             })
     } else {
         // get /url/:id
@@ -107,7 +107,7 @@ const addToCart = async (id) => {
                 })
             )
             .catch((error) => {
-                console.log(error);
+                console.log("Something went wrong");
             })
     }
 }
