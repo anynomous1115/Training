@@ -30,8 +30,8 @@ app.get("/products", async (req, res) => {
             .catch((error) => {
                 res.status(400).json("Something went wrong");
             })
-        const dataParse = await JSON.parse(dataInJson)
-        if (dataParse.constructor === String) {
+        const dataParse = JSON.parse(dataInJson)
+        if (typeof dataParse.products == 'string') {
             res.status(404).json("Something went wrong");
         } else {
             res.status(200).json(dataParse.products);
@@ -47,8 +47,8 @@ app.get("/carts", async (req, res) => {
             .catch((error) => {
                 res.status(400).json("Something went wrong");
             })
-        const dataParse = await JSON.parse(dataInJson);
-        if (dataParse.constructor === String) {
+        const dataParse = JSON.parse(dataInJson);
+        if (typeof dataParse.carts == 'string') {
             res.status(404).json("Something went wrong");
         } else {
             res.status(200).json(dataParse.carts);
@@ -64,12 +64,13 @@ app.post("/carts", async (req, res) => {
             .catch((error) => {
                 res.status(400).json("Something went wrong");
             })
-        const dataParse = await JSON.parse(dataInJson);
-        if (dataParse.constructor === String) {
+        const dataParse = JSON.parse(dataInJson);
+        if (typeof dataParse.carts == 'string') {
             res.status(404).json("Something went wrong");
         } else {
             const checkReqBody = dataParse.products.find(i => i.id == req.body.id);
-            if (checkReqBody == undefined) {
+            console.log(checkReqBody);
+            if (checkReqBody === undefined) {
                 res.status(404).json("San pham khong ton tai trong kho");
             } else {
                 const itemCarts = {
@@ -94,7 +95,7 @@ app.delete("/carts/:id", async (req, res) => {
                 res.status(400).json("Something went wrong");
             })
         const dataParse = JSON.parse(dataInJson);
-        if (dataParse.constructor === String) {
+        if (typeof dataParse.carts == 'string') {
             res.status(404).json("Something went wrong");
         } else {
             const index = dataParse.carts.findIndex(i => i.id == req.params.id);
@@ -117,8 +118,8 @@ app.put("/carts/:id", async (req, res) => {
         .catch((error) => {
             res.status(400).json("Something went wrong");
         })
-    const dataParse = await JSON.parse(dataInJson);
-    if (dataParse.constructor === String) {
+    const dataParse = JSON.parse(dataInJson);
+    if (typeof dataParse.carts == 'string') {
         res.status(404).json("Something went wrong");
     } else {
         const index = dataParse.carts.findIndex(i => i.id == req.body.id);
