@@ -44,7 +44,7 @@ const updateQuantityCartItem = async (id, num) => {
             },
             body: JSON.stringify({
                 id,
-                quantity: cartState[index].quantity = num
+                quantity: cartState[index].quantity = parseInt(num)
             })
         })
             .catch((error) => {
