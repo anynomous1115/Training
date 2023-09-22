@@ -36,6 +36,7 @@ const updateQuantityCartItem = async (id, num) => {
             })
 
     } else {
+        console.log(num);
         await fetch(`${API_URL}/carts/${id}`, {
             method: "PUT",
             headers: {
@@ -43,7 +44,7 @@ const updateQuantityCartItem = async (id, num) => {
             },
             body: JSON.stringify({
                 id,
-                quantity: cartState[index].quantity = parseInt(num)
+                quantity: cartState[index].quantity = num
             })
         })
             .catch((error) => {
