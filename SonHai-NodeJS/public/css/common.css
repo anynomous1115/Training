@@ -1,7 +1,127 @@
 .heartAnimation {
     animation: heart 1.3s infinite running;
 }
+/* login and register */
 
+.root {
+    height: 58rem;
+}
+
+.container {
+    max-width: 35rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    text-align: center;
+    padding-top: 6rem;
+}
+
+.title h3 {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+.title ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.title ul li {
+    list-style: none;
+    padding: 0 0.25rem;
+}
+
+.title ul li span {
+    padding-right: 0.35rem;
+}
+
+.title ul li a {
+    text-decoration: none;
+    color: var(--black-95);
+}
+
+.form {
+    padding-top: 2rem;
+    width: 100%;
+}
+
+.form .form-item {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+
+}
+
+.form .form-item span {
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+}
+
+.form span .span-child {
+    color: var(--red-60);
+}
+
+.form .form-item input {
+    padding: 1rem 0.5rem;
+    border: var(--black-35) solid 1px;
+    border-radius: 5px;
+}
+
+.form .form-item input::placeholder {
+    font-size: 1rem;
+}
+
+.form .form-item input:focus {
+    border: var(--green-50) solid 1px;
+}
+
+.form .form-item-option {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.form .form-item-option .checkbox input {
+    margin-right: 0.25rem;
+}
+
+.form .form-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.form .form-item-option .forgot-password a {
+    color: var(--black-95);
+}
+
+.form .form-btn button {
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 6.25rem;
+    border: none;
+    background-color: var(--black-95);
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+.register {
+    display: flex;
+    justify-content: center;
+    color: var(--black-35);
+}
+.register a{
+    padding-left: 0.5rem;
+    color: var(--black-95);
+}
 @keyframes heart {
     from {
         font-size: 1rem;

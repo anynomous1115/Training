@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/register.css">
+    <script type="module" src="./ui-controllers/register.controller.js"></script>
+
+</head>
+
+<body>
+    <div class="root">
+        <div class="container">
+            <div class="title">
+                <h3>Login</h3>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><span>/</span><a href="#">Customers</a></li>
+                    <li><span>/</span><a href="#">Register</a></li>
+                </ul>
+            </div>
+            <div class="form">
+                <form action="">
+                    <div class="form-item">
+                        <span>Email Address<span class="span-child">*</span></span>
+                        <input type="email" placeholder="example@gmail.com">
+                    </div>
+                    <div class="form-item">
+                        <span>Password<span class="span-child">*</span></span>
+                        <div class="input-with-icon">
+                            <input type="password">
+                            <i class="fa-regular fa-eye show"></i>
+                            <i class="fa-regular fa-eye-slash hidden"></i>
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <span>Confirm Password<span class="span-child">*</span></span>
+                        <div class="input-with-icon">
+                            <input type="password">
+                            <i class="fa-regular fa-eye show"></i>
+                            <i class="fa-regular fa-eye-slash hidden"></i>
+                        </div>
+                    </div>
+                    <div class="form-item-option">
+                        <div class="accept-terms">
+                            <input type="checkbox">
+                            <span> I agree to the <a>Terms of User</a></span>
+                        </div>
+                    </div>
+                    <div class="form-btn">
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
+                <span class="register">Not a member? <a href="">Login</a></span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

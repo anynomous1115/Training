@@ -2,7 +2,12 @@ import { API_URL } from "../constants/api.js";
 import { cartState, productsState } from "../ui-global-state/state.js"
 
 const getAllCartItem = async () => {
-    await fetch(`${API_URL}/carts`)
+    await fetch(`api/carts`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
         .then(res => res.json())
         .then(data => {
             data.forEach(element => {
@@ -20,7 +25,7 @@ const getAllCartItem = async () => {
 const updateQuantityCartItem = async (id, num) => {
     const index = cartState.findIndex(i => i.id == id)
     if (num == 1 || num == -1) {
-        await fetch(`${API_URL}/carts/${id}`, {
+        await fetch(`api/carts/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -36,8 +41,7 @@ const updateQuantityCartItem = async (id, num) => {
             })
 
     } else {
-        console.log(num);
-        await fetch(`${API_URL}/carts/${id}`, {
+        await fetch(`api/carts/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -53,9 +57,9 @@ const updateQuantityCartItem = async (id, num) => {
     }
 }
 
-const deleteCartItem =async (id) => {
+const deleteCartItem = async (id) => {
     const index = cartState.findIndex(i => i.id == id)
-    await fetch(`${API_URL}/carts/${id}`, {
+    await fetch(`api/carts/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -73,7 +77,7 @@ const addToCart = async (id) => {
     const indexCartItem = cartState.findIndex(i => i.id == id)
     if (indexCartItem !== -1) {
         cartState[indexCartItem].quantity += 1
-        await fetch(`${API_URL}/carts/${id}`, {
+        await fetch(`api/carts/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -91,7 +95,7 @@ const addToCart = async (id) => {
         // post /url   body {username: "TTT"}
         // put /url/:id  body {username: "XXX"}
         // delete /url/:id
-        await fetch(`${API_URL}/carts`, {
+        await fetch(`api/carts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

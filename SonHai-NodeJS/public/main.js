@@ -3,6 +3,7 @@ import { showProduct, colorsEvent, sizesEvent } from "./ui-controllers/product.C
 import { getAllProducts } from "./services/products.service.js";
 import { cartEvent } from "./ui-controllers/cart.controller.js";
 import { getAllCartItem } from "./services/cart.service.js";
+// import { showPassword } from "./ui-controllers/register.controller.js";
 
 window.addEventListener("load", () => {
     async function main() {
@@ -12,6 +13,7 @@ window.addEventListener("load", () => {
         cartEvent()
         colorsEvent()
         sizesEvent()
+        // showPassword()
     }
     
     main()
