@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const { handleError } = require("../middlewares/handleError");
 
-const pathFileJson = path.join(__dirname, "../db/d.json");
+const pathFileJson = path.join(__dirname, "../db/db.json");
 
 const readFileJson = (pathFile) => {
   return fs.readFile(pathFile, "utf8", (err, contents) => {
