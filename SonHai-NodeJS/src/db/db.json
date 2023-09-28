@@ -145,7 +145,21 @@
             ]
         }
     ],
-    "carts": "bshdshjdvsdhsjfds",
+    "carts": [
+        "fjsdbfhsgdfsdfbshj",
+        {
+            "id": 3,
+            "quantity": 1
+        },
+        {
+            "id": 2,
+            "quantity": 1
+        },
+        {
+            "id": 1,
+            "quantity": 1
+        }
+    ],
     "users": [
         {
             "idUser": 1,

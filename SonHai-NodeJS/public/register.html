@@ -21,7 +21,7 @@
     <div class="root">
         <div class="container">
             <div class="title">
-                <h3>Login</h3>
+                <h3>Register</h3>
                 <ul>
                     <li><a href="#">Homepage</a></li>
                     <li><span>/</span><a href="#">Customers</a></li>
@@ -29,26 +29,18 @@
                 </ul>
             </div>
             <div class="form">
-                <form action="">
+                <form action="" id="registerForm">
                     <div class="form-item">
-                        <span>Email Address<span class="span-child">*</span></span>
-                        <input type="email" placeholder="example@gmail.com">
+                        <label for="email">Email Address<span class="span-child">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="example@gmail.com">
                     </div>
                     <div class="form-item">
-                        <span>Password<span class="span-child">*</span></span>
-                        <div class="input-with-icon">
-                            <input type="password">
-                            <i class="fa-regular fa-eye show"></i>
-                            <i class="fa-regular fa-eye-slash hidden"></i>
-                        </div>
+                        <label for="password">Password<span class="span-child">*</span></label>
+                        <input type="password" id="password" name="password">
                     </div>
                     <div class="form-item">
-                        <span>Confirm Password<span class="span-child">*</span></span>
-                        <div class="input-with-icon">
-                            <input type="password">
-                            <i class="fa-regular fa-eye show"></i>
-                            <i class="fa-regular fa-eye-slash hidden"></i>
-                        </div>
+                        <label for="password">Confirm Password<span class="span-child">*</span></label>
+                        <input type="password" id="re-password" name="re-password">
                     </div>
                     <div class="form-item-option">
                         <div class="accept-terms">
@@ -65,6 +57,7 @@
         </div>
     </div>
     <script type="module" src="./ui-controllers/register.controller.js"></script>
+
 </body>
 
 </html>

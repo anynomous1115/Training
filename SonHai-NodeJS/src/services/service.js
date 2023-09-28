@@ -1,6 +1,5 @@
 const fs = require("fs").promises;
 const path = require("path");
-const { handleError } = require("../middlewares/handleError");
 
 const pathFileJson = path.join(__dirname, "../db/db.json");
 
@@ -14,15 +13,9 @@ const writeFileJson = (pathFile, data) => {
 };
 
 const getData = async () => {
-  try {
     const dataInJson = await readFileJson(pathFileJson);
     const dataParse = JSON.parse(dataInJson);
-    // new Error('Lỗi xảy ra trong hàm')
     return dataParse;
-  } catch (error) {
-    throw error
-  }
-
 };
 
 module.exports = {
