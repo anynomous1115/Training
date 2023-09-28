@@ -1,18 +1,15 @@
-const { getData } = require("../utils/getdata");
 const { writeFileJson } = require("../services/service");
 const path = require("path");
 
 const pathFileJson = path.join(__dirname, "../db/db.json");
 
-const getCart = async (req, res) => {
-  const data = await getData();
-  res.status(200).json(data.carts);
+const getCart = (req, res) => {
+  res.status(200).json(req.dataCarts);
 };
 
 const addToCart = async (req, res) => {
   try {
-    const data = await getData();
-    const checkReqBody = data.products.find((i) => i.id == req.body.id);
+    const checkReqBody = req.dataProducts.find((i) => i.id == req.body.id);
     if (checkReqBody == undefined) {
       res.status(404).json("San pham khong ton tai trong kho");
       return;
@@ -21,9 +18,9 @@ const addToCart = async (req, res) => {
         id: checkReqBody.id,
         quantity: req.body.quantity,
       };
-      data.carts.push(itemCarts);
-      await writeFileJson(pathFileJson, JSON.stringify(data));
-      const itemResponse = data.carts.find((i) => i.id == itemCarts.id);
+      req.dataCarts.push(itemCarts);
+      await writeFileJson(pathFileJson, JSON.stringify(req.data));
+      const itemResponse = req.dataCarts.find((i) => i.id == itemCarts.id);
       res.status(201).json(itemResponse);
     }
   } catch (error) {
@@ -33,15 +30,14 @@ const addToCart = async (req, res) => {
 
 const removeItem = async (req, res) => {
   try {
-    const data = await getData(req, res);
-    const index = data.carts.findIndex((i) => i.id == req.params.id);
+    const index = req.dataCarts.findIndex((i) => i.id == req.params.id);
     if (index == -1) {
       res.status(404).json("San pham khong ton tai trong gio hang");
       return;
     } else {
-      const itemCarts = data.carts[index];
-      data.carts.splice(index, 1);
-      await writeFileJson(pathFileJson, JSON.stringify(data));
+      const itemCarts = req.dataCarts[index];
+      req.dataCarts.splice(index, 1);
+      await writeFileJson(pathFileJson, JSON.stringify(req.data));
       res.status(200).json(itemCarts);
     }
   } catch (error) {
@@ -51,16 +47,15 @@ const removeItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
-    const data = await getData();
-    const index = data.carts.findIndex((i) => i.id == req.body.id);
+    const index = req.dataCarts.findIndex((i) => i.id == req.body.id);
     if (index == -1) {
       res.status(404).json("San pham khong ton tai trong gio hang");
-      return
+      return;
     } else {
       if (typeof req.body.quantity == "number") {
-        data.carts[index].quantity = req.body.quantity;
-        await writeFileJson(pathFileJson, JSON.stringify(data));
-        res.status(200).json(data.carts[index]);
+        req.dataCarts[index].quantity = req.body.quantity;
+        await writeFileJson(pathFileJson, JSON.stringify(req.data));
+        res.status(200).json(req.dataCarts[index]);
       } else {
         res.status(400).json("so luong nhap vao khong hop le");
         return;

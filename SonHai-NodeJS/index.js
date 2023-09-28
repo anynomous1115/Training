@@ -2,20 +2,15 @@ const express = require('express');
 const app = express();
 const port = 3030;
 const path = require('path');
-const router = require('./src/routes/route')
+const router = require('./src/routes/route');
+const { handleError } = require('./src/middlewares/handleError');
+
 
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/api", router);
-
-// function check(data){
-//         return /^[0-9]*$/.test(data);
-//   }
-
-// app.get("/test", async (req, res) => {
-//     res.send(check(req.body.quantity))
-// })
+app.use(handleError)
 
 
 // route 

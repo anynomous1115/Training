@@ -145,17 +145,12 @@
             ]
         }
     ],
-    "carts": [
-        {
-            "id": 3,
-            "quantity": 1
-        }
-    ],
+    "carts": "bshdshjdvsdhsjfds",
     "users": [
         {
             "idUser": 1,
             "email": "caosonhai1410@gmail.com",
-            "passWord":"123456"
+            "passWord": "123456"
         }
     ]
 }

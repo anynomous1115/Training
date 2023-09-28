@@ -1,11 +1,7 @@
-const { getData } = require("../utils/getdata");
-
-const getProducts = async (req, res,checkData) => {
-        const data = await getData()
-        res.status(200).json(data.products);
-
-}
+const getProducts = (req, res) => {
+  res.status(200).json(req.dataProducts);
+};
 
 module.exports = {
-    getProducts
-}
+  getProducts,
+};
