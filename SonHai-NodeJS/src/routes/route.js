@@ -1,18 +1,20 @@
 const express = require('express');
 const { addToCart, getCart, removeItem, updateItem } = require('../controllers/cart.controller');
 const { getProducts } = require('../controllers/product.controller');
+const { checkData } = require('../middlewares/middleware');
+
 
 const router = express.Router();
 
-router.get("/products",getProducts);
+router.get("/products",checkData,getProducts);
 
-router.get("/carts",getCart);
+router.get("/carts",checkData,getCart);
 
-router.post("/carts",addToCart)
+router.post("/carts",checkData,addToCart)
 
-router.delete("/carts/:id",removeItem)
+router.delete("/carts/:id",checkData,removeItem)
 
-router.put("/carts/:id",updateItem)
+router.put("/carts/:id",checkData,updateItem)
 
 router.post("/login")
 

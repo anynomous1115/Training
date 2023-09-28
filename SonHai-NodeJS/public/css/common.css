@@ -58,12 +58,12 @@
 
 }
 
-.form .form-item span {
+.form .form-item label {
     font-size: 1.1rem;
     padding: 0.5rem 0;
 }
 
-.form span .span-child {
+.form label .span-child {
     color: var(--red-60);
 }
 
