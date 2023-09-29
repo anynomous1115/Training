@@ -1,0 +1,24 @@
+
+POST http://localhost:3030/api/loginApi
+Content-Type: application/json
+
+{
+    "email": "caosonhai1410002@gmail.com",
+    "password": "Password123@"
+}
+
+###
+POST http://localhost:3030/api/logoutApi
+
+###
+POST http://localhost:3030/api/registerApi
+Content-Type: application/json
+
+{
+    "email": "caosonhai1410002@gmail.com",
+    "password": "Password123@",
+    "rePassword":"Password123@"
+}
+
+###
+GET  http://localhost:3030/api/carts

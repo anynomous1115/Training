@@ -1,16 +1,17 @@
 const express = require('express');
 const app = express();
-const port = 3030;
 const path = require('path');
 const router = require('./src/routes/route');
-const { handleError } = require('./src/middlewares/handleError');
+const dotenv =require('dotenv');
 
+const port = process.env.PORT||3030;
+
+dotenv.config();
 
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/api", router);
-app.use(handleError)
 
 
 // route 
