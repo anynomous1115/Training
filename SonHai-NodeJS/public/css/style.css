@@ -485,3 +485,27 @@ padding-left: 1rem;
     top: 2rem;
     right: 2rem;
 }
+.btnMenu{
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index:2;
+    background-color: var(--white);
+    width: 10rem;
+}
+
+.btnMenu .menuItem_wrap{
+    display: none;
+}
+
+.btnMenu .menuItem{
+    display: flex;
+    flex-direction: column;
+    border: var(--black-35) solid 1px;
+}
+.btnMenu .menuItem a{
+    width: 100%;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: var(--black-95);
+}

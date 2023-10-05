@@ -12,12 +12,13 @@ const checkEmail = (req, res, next) => {
 };
 const checkPassword = (req, res, next) => {
   const { password, rePassword } = req.body;
-
-  if (password !== rePassword) {
-    res.status(400).json({ message: "Confirm Password not match " });
+  console.log(req.body);
+  
+  if (rePassword !== password) {
+    res.status(400).json({ message: "Confirm Password not match" });
     return;
   }
-
+  
   if (password.length < 8) {
     res
       .status(400)
@@ -28,13 +29,12 @@ const checkPassword = (req, res, next) => {
   const passwordRegex =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])[A-Za-z\d@#$%^&+=]{8,}$/;
   const isValidPassword = passwordRegex.test(password);
-  console.log(isValidPassword);
 
   if (!isValidPassword) {
     res.status(400).json({
       message: "Password must contain letters, numbers, and special characters",
     });
-    return
+    return;
   }
   next();
 };

@@ -30,11 +30,13 @@
                 <form action="" id="loginForm">
                     <div class="form-item">
                         <label for="email">Email Address<span class="span-child">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="example@gmail.com">
+                        <input type="text" id="email" name="email" placeholder="example@gmail.com">
+                        <div class="messErrEmail styleErr"></div>
                     </div>
                     <div class="form-item">
                         <label for="password">Password<span class="span-child">*</span></label>
                         <input type="password" id="password" name="password">
+                        <div class="messErrPass styleErr"></div>
                     </div>
                     <div class="form-item-option">
                         <div class="checkbox">
@@ -49,7 +51,7 @@
                         <button type="submit">Login</button>
                     </div>
                 </form>
-                <span class="register">Not a member? <a href="">Register</a></span>
+                <span class="register">Not a member? <a href="./register.html">Register</a></span>
             </div>
         </div>
     </div>

@@ -27,6 +27,13 @@ const registerApi = async (req, res) => {
 
     req.dataUsers.push(user);
 
+    const cart = {
+      idUser: user.idUser,
+      cartItem: [],
+    };
+    
+    req.dataCarts.push(cart);
+
     await writeFileJson(pathFileJson, JSON.stringify(req.data));
     res.status(200).json("User successfully created");
   } catch (error) {
@@ -39,13 +46,12 @@ const loginApi = async (req, res) => {
 
   try {
     const checkUser = await req.dataUsers.find((i) => i.email == email);
-    
+
     if (checkUser == undefined) {
       res.status(400).json({ message: "Account does not exist" });
       return;
     } else {
       bcrypt.compare(password, checkUser.password).then((result) => {
-        
         if (result) {
           const ageToken = 3600;
           const accessToken = jwt.sign(
@@ -56,28 +62,26 @@ const loginApi = async (req, res) => {
             httpOnly: true,
             ageToken: ageToken,
           });
+
           res.status(200).json({
             message: "Logged in successfully",
             accessToken,
           });
         } else {
-          res.status(400).json({ message: "Logged in not successfully" });
+          res.status(401).json({ message: "Logged in not successfully" });
         }
       });
     }
-
   } catch (error) {
     res.status(400).json({ message: "Something went wrong" });
   }
 };
 
 const logoutApi = async (req, res) => {
-
   return res
     .clearCookie("access_token")
     .status(200)
     .json({ message: "Successfully logged out" });
-
 };
 module.exports = {
   registerApi,

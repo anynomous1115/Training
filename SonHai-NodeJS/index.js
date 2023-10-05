@@ -3,11 +3,13 @@ const app = express();
 const path = require('path');
 const router = require('./src/routes/route');
 const dotenv =require('dotenv');
+const cookieParser = require('cookie-parser');
 
 const port = process.env.PORT||3030;
 
 dotenv.config();
 
+app.use(cookieParser())
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));

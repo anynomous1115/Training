@@ -3,8 +3,13 @@ const path = require("path");
 
 const pathFileJson = path.join(__dirname, "../db/db.json");
 
-const getCart = (req, res) => {
-  res.status(200).json(req.dataCarts);
+const getCart = async (req, res) => {
+  try {
+    const cart = await req.dataCarts.find((i) => i.idUser == req.idUser);
+    res.status(200).json(cart.cartItem);
+  } catch (error) {
+    res.status(400).json("Something went wrong");
+  }
 };
 
 const addToCart = async (req, res) => {
@@ -18,9 +23,10 @@ const addToCart = async (req, res) => {
         id: checkReqBody.id,
         quantity: req.body.quantity,
       };
-      req.dataCarts.push(itemCarts);
+      const cart = await req.dataCarts.find((i) => i.idUser == req.idUser);
+      cart.cartItem.push(itemCarts);
       await writeFileJson(pathFileJson, JSON.stringify(req.data));
-      const itemResponse = req.dataCarts.find((i) => i.id == itemCarts.id);
+      const itemResponse = cart.cartItem.find((i) => i.id == itemCarts.id);
       res.status(201).json(itemResponse);
     }
   } catch (error) {
@@ -30,13 +36,17 @@ const addToCart = async (req, res) => {
 
 const removeItem = async (req, res) => {
   try {
-    const index = req.dataCarts.findIndex((i) => i.id == req.params.id);
+    const cart = await req.dataCarts.find((i) => i.idUser == req.idUser);
+    const index = cart.cartItem.findIndex((i) => i.id == req.params.id);
+
     if (index == -1) {
       res.status(404).json("San pham khong ton tai trong gio hang");
       return;
     } else {
-      const itemCarts = req.dataCarts[index];
-      req.dataCarts.splice(index, 1);
+      const itemCarts = cart.cartItem[index];
+
+      console.log(req.dataCarts);
+      cart.cartItem.splice(index, 1);
       await writeFileJson(pathFileJson, JSON.stringify(req.data));
       res.status(200).json(itemCarts);
     }
@@ -47,15 +57,16 @@ const removeItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
-    const index = req.dataCarts.findIndex((i) => i.id == req.body.id);
+    const cart = await req.dataCarts.find((i) => i.idUser == req.idUser);
+    const index = cart.cartItem.findIndex((i) => i.id == req.body.id);
     if (index == -1) {
       res.status(404).json("San pham khong ton tai trong gio hang");
       return;
     } else {
       if (typeof req.body.quantity == "number") {
-        req.dataCarts[index].quantity = req.body.quantity;
+        cart.cartItem[index].quantity = req.body.quantity;
         await writeFileJson(pathFileJson, JSON.stringify(req.data));
-        res.status(200).json(req.dataCarts[index]);
+        res.status(200).json(cart.cartItem[index]);
       } else {
         res.status(400).json("so luong nhap vao khong hop le");
         return;
