@@ -2,18 +2,34 @@ import { productsState } from "../ui-global-state/state.js";
 import { addToCart } from "../services/cart.service.js";
 import { openCart, showCart } from "./cart.controller.js";
 
-const menuEvent = () => {
-  const iconMenu = document.querySelector("#iconMenu");
+const openMenu = (isOpen) => {
   const menuItem_wrap = document.querySelector(".menuItem_wrap");
-  const products = document.querySelector(".products");
-  iconMenu.addEventListener("click", () => {
+  if (isOpen) {
     menuItem_wrap.style.display = "block";
-  });
-  products.addEventListener("click", () => {
+  } else {
     menuItem_wrap.style.display = "none";
+  }
+};
+const menuEventLoggedIn = () => {
+  const iconUser = document.querySelector("#iconUser");
+  const productsDom = document.querySelector(".products");
+  iconUser.addEventListener("click", () => {
+    openMenu(true);
+  });
+  productsDom.addEventListener("click", () => {
+    openMenu(false);
   });
 };
-
+const menuEventNotLoggedIn = () => {
+  const iconMenu = document.querySelector("#iconMenu");
+  const productsDom = document.querySelector(".products");
+  iconMenu.addEventListener("click", () => {
+    openMenu(true);
+  });
+  productsDom.addEventListener("click", () => {
+    openMenu(false);
+  });
+};
 function showSize(sizes) {
   let sizeString = "";
   let sizeAfter = [];
@@ -153,8 +169,13 @@ function showProduct() {
                     </div>
               `;
   }
-
   addToCartEvent();
 }
 
-export { showProduct, colorsEvent, sizesEvent, menuEvent };
+export {
+  showProduct,
+  colorsEvent,
+  sizesEvent,
+  menuEventLoggedIn,
+  menuEventNotLoggedIn,
+};

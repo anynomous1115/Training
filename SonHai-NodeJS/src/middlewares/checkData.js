@@ -11,7 +11,8 @@ const checkData = async (req, res, next) => {
     req.dataProducts = data.products;
     req.dataCarts = data.carts;
     req.dataUsers = data.users;
-    
+    req.dataCartItem = data.cartItem;
+
     next();
   } catch (error) {
     res.status(400).json({ message: "Something went wrong ! 12" });

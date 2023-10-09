@@ -1,5 +1,8 @@
+import { openCart } from "../ui-controllers/cart.controller.js";
+import { showSuccessToastWithAutoHide } from "../utils/toast.js";
+
 const register = async (data) => {
-  fetch("/api/registerApi", {
+  await fetch("/api/registerApi", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -8,16 +11,30 @@ const register = async (data) => {
   })
     .then((res) => {
       if (res.ok) {
-        window.location.href = "/login";
+        return true;
+      } else if (res.status === 409) {
+        return false;
+      }
+    })
+    .then((data) => {
+      if (data) {
+        
+        showSuccessToastWithAutoHide("Đăng ký thành công!", "#0c8c6c");
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 3000);
+      } else {
+        showSuccessToastWithAutoHide("Email đã tồn tại!", "#db4444");
       }
     })
     .catch((error) => {
+      console.log(error);
       console.log({ message: "co loi r" });
     });
 };
 
 const login = async (data) => {
-  fetch("/api/loginApi", {
+  await fetch("/api/loginApi", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,23 +43,28 @@ const login = async (data) => {
   })
     .then((res) => {
       if (res.ok) {
-        window.location.href = "/";
-      } else {
-        return res.json();
+        return true;
+      }
+      if (res.status === 401) {
+        return false;
       }
     })
     .then((data) => {
-      const messErrPass = document.querySelector(".messErrPass");
-      messErrPass.textContent = data.message;
-
-      console.log(data.message);
+      if (data) {
+        window.location.href = "/";
+      } else {
+        showSuccessToastWithAutoHide(
+          "Email hoặc mật khẩu không hợp lệ!",
+          "#db4444"
+        );
+      }
     })
     .catch((error) => {
       console.log({ message: "co loi r" });
     });
 };
-const logout = () => {
-  fetch("/api/logoutApi", {
+const logout = async () => {
+  await fetch("/api/logoutApi", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,15 +72,73 @@ const logout = () => {
   })
     .then((res) => {
       if (res.ok) {
-        window.location.href = "/";
-        return res.json();
+        return true;
+      } else {
+        return false;
       }
     })
     .then((data) => {
-      alert(data.message);
+      if (data) {
+        window.location.href = "/";
+      }
     })
     .catch((error) => {
       console.log({ message: "co loi r" });
     });
 };
-export { register, login, logout };
+const checkUserLogIn = async () => {
+  await fetch("/api/user", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      const btnMenu = document.querySelector(".btnMenu");
+      const btnOpenCart = document.querySelector(".btnCart");
+      if (res.ok) {
+        btnMenu.innerHTML += `
+        <i class="fa-solid fa-bars" style="display:none" id="iconMenu"></i>
+        <div class="wrap-iconUser">
+            <i class="fa-solid fa-user" id="iconUser"></i>
+        <div class="emailUser"></div>
+        </div>
+         <div class="menuItem_wrap">
+            <div class="menuItem">
+                <a href="#" id="profile">Profile</a>
+                <a href="./login.html" style="display:none" id="login">Login</a>
+                <a href="./register.html" style="display:none" id="register">Register</a>
+                <a href="#" id="logout">Logout</a>
+            </div>
+        </div>
+        `;
+        return res.json();
+      } else {
+        btnOpenCart.style.display = "none";
+        btnMenu.innerHTML += `
+        <div class="wrap-iconUser" style="display:none">
+            <i class="fa-solid fa-user" id="iconUser"></i>
+        <div class="emailUser"></div>
+        </div>
+        <div class="wrap-iconUser">
+          <i class="fa-solid fa-bars" id="iconMenu"></i>
+                </div>
+                <div class="menuItem_wrap">
+                    <div class="menuItem">
+                    <a href="./login.html" id="login">Login</a>
+                    <a href="./register.html" id="register">Register</a>
+                    <a href="#" style="display:none" id="logout">Logout</a>
+                    </div>
+                </div>
+        `;
+      }
+    })
+    .then((data) => {
+      const emailUser = document.querySelector(".emailUser");
+      emailUser.textContent = data.email;
+    })
+    .catch((error) => {
+      console.log("coa loi xay ra");
+    });
+};
+export { register, login, logout, checkUserLogIn };
