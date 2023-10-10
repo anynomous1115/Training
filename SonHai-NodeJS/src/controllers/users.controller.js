@@ -36,7 +36,7 @@ const registerApi = async (req, res) => {
 
     const cartItem = {
       cartItemId: cart.cartItemId,
-      item: [],
+      items: [],
     };
 
     req.dataCartItem.push(cartItem);

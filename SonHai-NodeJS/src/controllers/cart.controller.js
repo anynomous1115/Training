@@ -23,7 +23,7 @@ const addToCart = async (req, res) => {
         id: checkReqBody.id,
         quantity: req.body.quantity,
       };
-      console.log(req);
+
       req.items.push(item);
 
       await writeFileJson(pathFileJson, JSON.stringify(req.data));
