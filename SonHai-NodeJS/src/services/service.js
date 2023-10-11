@@ -13,13 +13,25 @@ const writeFileJson = (pathFile, data) => {
 };
 
 const getData = async () => {
-    const dataInJson = await readFileJson(pathFileJson);
-    const dataParse = JSON.parse(dataInJson);
-    return dataParse;
+  const dataInJson = await readFileJson(pathFileJson);
+  const dataParse = JSON.parse(dataInJson);
+  return dataParse;
+};
+
+const findInData = (data, field, findConditionValue) => {
+  const result = data.find((i) => i[field] == findConditionValue);
+  return result;
+};
+
+const findIndexInData = (data, field, findConditionValue) => {
+  const index = data.findIndex((i) => i[field] == findConditionValue);
+  return index;
 };
 
 module.exports = {
   readFileJson,
   writeFileJson,
   getData,
+  findInData,
+  findIndexInData
 };

@@ -8,36 +8,57 @@ const {
 const { getProducts } = require("../controllers/product.controller");
 const { checkData } = require("../middlewares/checkData");
 const {
-  registerApi,
-  loginApi,
-  logoutApi,
+  register,
+  login,
+  logout,
   checkUserLogin,
 } = require("../controllers/users.controller");
-const {
-  checkEmail,
-  checkPassword,
-} = require("../middlewares/checkEmailAndPass");
+const { validBodyData } = require("../middlewares/checkEmailAndPass");
 const { authenToken } = require("../middlewares/authenToken");
 const { findCartItem } = require("../middlewares/findCartItem");
 
 const router = express.Router();
 
+const registerSchema = {
+  email: {
+    type: "string",
+    regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  },
+  password: {
+    type: "string",
+    regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])[A-Za-z\d@#$%^&+=]{8,}$/,
+  },
+};
+
+const fieldCheckRegister = ["email", "password"];
+const fieldCheckLogin = ["email"];
+
 router.get("/products", checkData, getProducts);
 
-router.get("/carts", checkData, authenToken, findCartItem, getCart);
+router.get("/carts", authenToken, checkData, findCartItem, getCart);
 
-router.post("/carts", checkData, authenToken, findCartItem, addToCart);
+router.post("/carts", authenToken, checkData, findCartItem, addToCart);
 
-router.delete("/carts/:id", checkData, authenToken, findCartItem, removeItem);
+router.delete("/carts/:id", authenToken, checkData, findCartItem, removeItem);
 
-router.put("/carts/:id", checkData, authenToken, findCartItem, updateItem);
+router.put("/carts/:id", authenToken, checkData, findCartItem, updateItem);
 
-router.post("/registerApi", checkEmail, checkPassword, checkData, registerApi);
+router.post(
+  "/register",
+  validBodyData(registerSchema, fieldCheckRegister),
+  checkData,
+  register
+);
 
-router.post("/loginApi", checkEmail, checkData, loginApi);
+router.post(
+  "/login",
+  validBodyData(registerSchema, fieldCheckLogin),
+  checkData,
+  login
+);
 
-router.post("/logoutApi", authenToken, logoutApi);
+router.post("/logout", authenToken, logout);
 
-router.get("/user", checkData, authenToken, checkUserLogin);
+router.get("/user", authenToken, checkData, checkUserLogin);
 
 module.exports = router;

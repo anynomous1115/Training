@@ -2,7 +2,7 @@ import { openCart } from "../ui-controllers/cart.controller.js";
 import { showSuccessToastWithAutoHide } from "../utils/toast.js";
 
 const register = async (data) => {
-  await fetch("/api/registerApi", {
+  await fetch("/api/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,6 @@ const register = async (data) => {
     })
     .then((data) => {
       if (data) {
-        
         showSuccessToastWithAutoHide("Đăng ký thành công!", "#0c8c6c");
         setTimeout(() => {
           window.location.href = "/login";
@@ -34,7 +33,7 @@ const register = async (data) => {
 };
 
 const login = async (data) => {
-  await fetch("/api/loginApi", {
+  await fetch("/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -64,7 +63,7 @@ const login = async (data) => {
     });
 };
 const logout = async () => {
-  await fetch("/api/logoutApi", {
+  await fetch("/api/logout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

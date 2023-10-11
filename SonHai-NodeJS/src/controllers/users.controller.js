@@ -1,4 +1,4 @@
-const { writeFileJson } = require("../services/service");
+const { writeFileJson, findInData } = require("../services/service");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
@@ -7,12 +7,12 @@ const jwt = require("jsonwebtoken");
 const pathFileJson = path.join(__dirname, "../db/db.json");
 const saltRound = 10;
 
-const registerApi = async (req, res) => {
+const register = async (req, res) => {
   const { email, password } = req.body;
-
+  const { users, carts, cartsItem } = req.data;
   try {
-    const checkUser = req.dataUsers.find((i) => i.email == email);
-    if (checkUser !== undefined) {
+    const userChecking = await findInData(users, "email", email);
+    if (userChecking !== undefined) {
       res.status(409).json({ message: "Account already exists" });
       return;
     }
@@ -25,21 +25,21 @@ const registerApi = async (req, res) => {
       password: hashedPassword,
     };
 
-    req.dataUsers.push(user);
+    users.push(user);
 
     const cart = {
       idUser: user.idUser,
-      cartItemId: uuidv4(),
+      cartsItemId: uuidv4(),
     };
 
-    req.dataCarts.push(cart);
+    carts.push(cart);
 
     const cartItem = {
-      cartItemId: cart.cartItemId,
+      cartsItemId: cart.cartsItemId,
       items: [],
     };
 
-    req.dataCartItem.push(cartItem);
+    cartsItem.push(cartItem);
 
     await writeFileJson(pathFileJson, JSON.stringify(req.data));
     res.status(200).json("User successfully created");
@@ -48,21 +48,21 @@ const registerApi = async (req, res) => {
   }
 };
 
-const loginApi = async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
-
+  const { users } = req.data;
   try {
-    const checkUser = await req.dataUsers.find((i) => i.email == email);
+    const userChecking = await findInData(users, "email", email);
 
-    if (checkUser == undefined) {
+    if (userChecking == undefined) {
       res.status(400).json({ message: "Account does not exist" });
       return;
     } else {
-      bcrypt.compare(password, checkUser.password).then((result) => {
+      bcrypt.compare(password, userChecking.password).then((result) => {
         if (result) {
           const ageToken = 3600;
           const accessToken = jwt.sign(
-            { id: checkUser.idUser },
+            { id: userChecking.idUser },
             process.env.ACCESS_TOKEN_SECRET
           );
           res.cookie("access_token", accessToken, {
@@ -84,7 +84,7 @@ const loginApi = async (req, res) => {
   }
 };
 
-const logoutApi = async (req, res) => {
+const logout = async (req, res) => {
   return res
     .clearCookie("access_token")
     .status(200)
@@ -92,18 +92,21 @@ const logoutApi = async (req, res) => {
 };
 
 const checkUserLogin = async (req, res) => {
-  const checkUser = await req.dataUsers.find((i) => i.idUser == req.idUser);
+  const { users } = req.data;
+  const { idUser } = req.accessToken;
 
-  if (checkUser) {
-    res.status(200).json(checkUser);
+  const userChecking = await findInData(users, "idUser", idUser);
+
+  if (userChecking) {
+    res.status(200).json(userChecking);
   } else {
     res.status(400).json({ message: "You are not logged in" });
   }
 };
 
 module.exports = {
-  registerApi,
-  loginApi,
-  logoutApi,
+  register,
+  login,
+  logout,
   checkUserLogin,
 };

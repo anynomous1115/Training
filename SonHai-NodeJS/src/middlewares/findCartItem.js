@@ -1,16 +1,21 @@
+const { findInData } = require("../services/service");
+
 const findCartItem = async (req, res, next) => {
   try {
-    const cart = await req.dataCarts.find((i) => i.idUser == req.idUser);
-    const cartItem = await req.dataCartItem.find(
-      (i) => i.cartItemId == cart.cartItemId
+    const { idUser } = req.accessToken;
+    const { carts, cartsItem } = req.data;
+    const cart = await findInData(carts, "idUser", idUser);
+    const cartItem = await findInData(
+      cartsItem,
+      "cartsItemId",
+      cart.cartsItemId
     );
 
-    req.cartItem = cartItem;
-    req.items = cartItem.items;
-    console.log(req.items);
+    req.cartItemOfUserLoggedIn = cartItem;
+
     next();
   } catch (error) {
-    console.log({ message: "Something went wrong!" });
+    res.status(400).json({ message: "Something went wrong!" });
   }
 };
 

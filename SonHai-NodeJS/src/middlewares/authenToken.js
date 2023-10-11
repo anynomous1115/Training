@@ -12,7 +12,9 @@ const authenToken = async (req, res, next) => {
 
   try {
     const data = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-    req.idUser = data.id;
+    req.accessToken = {
+      idUser: data.id,
+    };
     next();
   } catch (error) {
     res.status(401).send({ error: "Not authorized to access this resource" });

@@ -6,12 +6,12 @@ const checkData = async (req, res, next) => {
     if (typeof data.products == "string" || typeof data.carts == "string") {
       return res.status(400).json({ message: "Something went wrong ! 123" });
     }
-
-    req.data = data;
-    req.dataProducts = data.products;
-    req.dataCarts = data.carts;
-    req.dataUsers = data.users;
-    req.dataCartItem = data.cartItem;
+    req.data = {
+      products: data.products,
+      carts: data.carts,
+      cartsItem: data.cartsItem,
+      users: data.users,
+    };
 
     next();
   } catch (error) {
