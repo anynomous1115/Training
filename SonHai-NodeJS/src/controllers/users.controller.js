@@ -8,9 +8,13 @@ const pathFileJson = path.join(__dirname, "../db/db.json");
 const saltRound = 10;
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, rePassword } = req.body;
   const { users, carts, cartsItem } = req.data;
   try {
+    if (rePassword !== password) {
+      res.status(400).json({message:"Confirm Password is incorrect"})
+      return
+    }
     const userChecking = await findInData(users, "email", email);
     if (userChecking !== undefined) {
       res.status(409).json({ message: "Account already exists" });

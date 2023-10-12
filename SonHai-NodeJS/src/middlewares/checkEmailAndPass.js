@@ -40,7 +40,8 @@ const checkPassword = (req, res, next) => {
 
 const validBodyData = (schema, fieldCheck) => (req, res, next) => {
   const body = req.body;
-
+  let hasError = false
+  
   fieldCheck.forEach((element) => {
     if (typeof body[element] !== typeof schema[element].type) {
       res.status(400).json({ message: `Invalid ${element}` });
