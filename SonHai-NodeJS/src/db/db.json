@@ -1,1 +1,160 @@
-{"products":[{"id":1,"name":"A Beautiful Sweater For Women","image":"https://gougi-demo.myshopify.com/cdn/shop/products/01_1920x.png?v=1640740769","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/17097755_37_D8_720x.png?v=1640740769","disCount":25,"originalPrice":77,"color":["#808000","#ffffff"],"size":["M","L","XL"]},{"id":2,"name":"A Fashionable Crossbody Bag","image":"https://gougi-demo.myshopify.com/cdn/shop/products/05_1920x.png?v=1640740761","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/17035136_37_720x.png?v=1640740761","disCount":0,"originalPrice":56,"color":["#d2b48c","#ffffff"],"size":["S","M","L"]},{"id":3,"name":"Beautiful Earrings","image":"https://gougi-demo.myshopify.com/cdn/shop/products/b1_grande.png?v=1640740744","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/b2_720x.png?v=1640740744","disCount":25,"originalPrice":87,"color":["#daa520","#ffe4e1","#f4a460","#fff5ee"],"size":[]},{"id":4,"name":"Boot Solar Wave Hiking","image":"https://gougi-demo.myshopify.com/cdn/shop/products/02_1920x.png?v=1640740756","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/021_720x.png?v=1640740756","disCount":26,"originalPrice":432,"color":[],"size":[]},{"id":5,"name":"Cellucor Amino Acid","image":"https://gougi-demo.myshopify.com/cdn/shop/products/3.1_1920x.jpg?v=1667211881","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/3.2_540x.jpg?v=1667211881","disCount":31,"originalPrice":98,"color":[],"size":[]},{"id":6,"name":"Check Structured Blazer","image":"https://gougi-demo.myshopify.com/cdn/shop/products/IMG_15_grande.png?v=1640740810","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/17095934_43_D2_360x.png?v=1640740810","disCount":34,"originalPrice":66,"color":["#8fbc8f","#ffffff"],"size":["S","M","L","XL"]},{"id":7,"name":"Evlution Nutrition BCAA5000","image":"https://gougi-demo.myshopify.com/cdn/shop/products/5.1_720x.jpg?v=1667212272","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/5.2_720x.jpg?v=1667212274","disCount":31,"originalPrice":98,"color":[],"size":[]},{"id":8,"name":"Fashion Cat Eye Glasses","image":"https://gougi-demo.myshopify.com/cdn/shop/products/h2_1920x.png?v=1640740713","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/h3_360x.png?v=1640740713","disCount":41,"originalPrice":54,"color":["#cd5c5c","#daa520","#e9967a","#fff8dc"],"size":[]},{"id":9,"name":"Fashion High Heels Boots","image":"https://gougi-demo.myshopify.com/cdn/shop/products/y1_grande.png?v=1640740693","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/y2_360x.png?v=1640740693","disCount":30,"originalPrice":47,"color":[],"size":["S","M","L","XL"]},{"id":10,"name":"Fashion High Heels Shoes","image":"https://gougi-demo.myshopify.com/cdn/shop/products/87090532_07_D41_grande.png?v=1640740797","imageHover":"https://gougi-demo.myshopify.com/cdn/shop/products/87090532_071_360x.png?v=1640740797","disCount":25,"originalPrice":289,"color":["#b8860b","#ffffff"],"size":["S","M","L"]}],"carts":[{"idUser":"a5d3db8a-4577-4863-8733-d7d0c4e12ba7","cartsItemId":"7d5c87aa-9237-46a8-adff-758e79144bcd"},{"idUser":"6c3da0a8-db26-4e71-bff6-7c1f0609fd7f","cartsItemId":"c20a5780-6582-424b-b03a-f781893a4983"},{"idUser":"62548e69-f2f6-4d65-942c-1544b8957951","cartsItemId":"367525eb-1030-49a1-b20d-b6d8894911f4"},{"idUser":"ec6a720b-d24b-4d8c-bce2-0ce8841a6402","cartsItemId":"abf8c4c5-c9af-4413-8065-ebd5a62dec27"},{"idUser":"fc83315a-d3d0-4e91-ab82-5295ee7a3b19","cartsItemId":"a7ad3ed3-332d-4b8e-8c83-cb2c783c2cc2"},{"idUser":"0188919c-bec8-4734-ba4d-7cd48eb04a0f","cartsItemId":"3b566ee6-aca6-443f-83c1-40247c26ffc4"},{"idUser":"1b224978-bb62-4059-aa95-7a0acc151808","cartsItemId":"0ddd4ad8-3c96-4c95-a46a-663ec7c95075"},{"idUser":"9c5d748f-fc90-49b3-a2dd-d6da693f37c6","cartsItemId":"62aee583-cbf3-4f05-b1d7-c7d17ec0de64"},{"idUser":"108fee57-a917-4f2b-ae7c-04991bb9eaf0","cartsItemId":"e68871fe-2bf6-4e08-b316-33f2888be5ab"}],"cartsItem":[{"cartsItemId":"7d5c87aa-9237-46a8-adff-758e79144bcd","items":[]},{"cartsItemId":"c20a5780-6582-424b-b03a-f781893a4983","items":[]},{"cartsItemId":"367525eb-1030-49a1-b20d-b6d8894911f4","items":[]},{"cartsItemId":"abf8c4c5-c9af-4413-8065-ebd5a62dec27","items":[]},{"cartsItemId":"a7ad3ed3-332d-4b8e-8c83-cb2c783c2cc2","items":[]},{"cartsItemId":"3b566ee6-aca6-443f-83c1-40247c26ffc4","items":[]},{"cartsItemId":"0ddd4ad8-3c96-4c95-a46a-663ec7c95075","items":[]},{"cartsItemId":"62aee583-cbf3-4f05-b1d7-c7d17ec0de64","items":[]},{"cartsItemId":"e68871fe-2bf6-4e08-b316-33f2888be5ab","items":[]}],"users":[{"idUser":"a5d3db8a-4577-4863-8733-d7d0c4e12ba7","email":"caosonhai1410@gmail.com","password":"$2b$10$WSUOTPGc84Kbyiwf.0c9YOgftsx/s79TMgq1n.9h/SuTRbfaBq3E2"},{"idUser":"6c3da0a8-db26-4e71-bff6-7c1f0609fd7f","email":"hai1410@gmail.com","password":"$2b$10$Ib0IskQ5X7eF/vQ4PRx8M.RMDTjtbK.vgOkKbQNq6Rtq6csRKgknC"},{"idUser":"62548e69-f2f6-4d65-942c-1544b8957951","email":"caosonhai14110@gmail.com","password":"$2b$10$KDVoqYmOlmMVnLIucNptu.E8qhMhFB5RfxsgdVPboQSFaJa1W1Flm"},{"idUser":"ec6a720b-d24b-4d8c-bce2-0ce8841a6402","email":"caosonhai141@gmail.com","password":"$2b$10$nK.uGa1SkK/oYUTBKAAZjOr3OwbKdEjAfwiu9sUXsZnVosTilPUPW"},{"idUser":"fc83315a-d3d0-4e91-ab82-5295ee7a3b19","email":"caosonhai11gmail.com","password":"$2b$10$gxhMMUez/mBqlkaqze2XT.RMUrru1r2JkLeHkg2X.XBLirBaL/RUy"},{"idUser":"0188919c-bec8-4734-ba4d-7cd48eb04a0f","email":"caosonhai111@gmail.com","password":"$2b$10$Ihr3NH4vaRFYihFfzSXxBeVZT92L0Dp0gx50Uf/q20r4T9d4Zw5zi"},{"idUser":"1b224978-bb62-4059-aa95-7a0acc151808","email":"caosonhai1111@gmail.com","password":"$2b$10$K77Ibvh5gHKJs2gvxjDEIOECucYVLy5YonUNGZ.BcljaXf1m4ljUG"},{"idUser":"9c5d748f-fc90-49b3-a2dd-d6da693f37c6","email":"caosonhai1111gmail.com","password":"$2b$10$icJCGDThuORlDG03MhLuleaZoaHjpfJfPZJObLa3Yyge1Fr25LxEa"},{"idUser":"108fee57-a917-4f2b-ae7c-04991bb9eaf0","email":"caosonhai11111@gmail.com","password":"$2b$10$sDP125OOzWH6kElh5nTqGe1AGDv1TseM1xxIF2Z7wY/O.lqwRwXMO"}]}
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "A Beautiful Sweater For Women",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/01_1920x.png?v=1640740769",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/17097755_37_D8_720x.png?v=1640740769",
+      "disCount": 25,
+      "originalPrice": 77,
+      "color": ["#808000", "#ffffff"],
+      "size": ["M", "L", "XL"]
+    },
+    {
+      "id": 2,
+      "name": "A Fashionable Crossbody Bag",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/05_1920x.png?v=1640740761",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/17035136_37_720x.png?v=1640740761",
+      "disCount": 0,
+      "originalPrice": 56,
+      "color": ["#d2b48c", "#ffffff"],
+      "size": ["S", "M", "L"]
+    },
+    {
+      "id": 3,
+      "name": "Beautiful Earrings",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/b1_grande.png?v=1640740744",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/b2_720x.png?v=1640740744",
+      "disCount": 25,
+      "originalPrice": 87,
+      "color": ["#daa520", "#ffe4e1", "#f4a460", "#fff5ee"],
+      "size": []
+    },
+    {
+      "id": 4,
+      "name": "Boot Solar Wave Hiking",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/02_1920x.png?v=1640740756",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/021_720x.png?v=1640740756",
+      "disCount": 26,
+      "originalPrice": 432,
+      "color": [],
+      "size": []
+    },
+    {
+      "id": 5,
+      "name": "Cellucor Amino Acid",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/3.1_1920x.jpg?v=1667211881",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/3.2_540x.jpg?v=1667211881",
+      "disCount": 31,
+      "originalPrice": 98,
+      "color": [],
+      "size": []
+    },
+    {
+      "id": 6,
+      "name": "Check Structured Blazer",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/IMG_15_grande.png?v=1640740810",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/17095934_43_D2_360x.png?v=1640740810",
+      "disCount": 34,
+      "originalPrice": 66,
+      "color": ["#8fbc8f", "#ffffff"],
+      "size": ["S", "M", "L", "XL"]
+    },
+    {
+      "id": 7,
+      "name": "Evlution Nutrition BCAA5000",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/5.1_720x.jpg?v=1667212272",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/5.2_720x.jpg?v=1667212274",
+      "disCount": 31,
+      "originalPrice": 98,
+      "color": [],
+      "size": []
+    },
+    {
+      "id": 8,
+      "name": "Fashion Cat Eye Glasses",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/h2_1920x.png?v=1640740713",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/h3_360x.png?v=1640740713",
+      "disCount": 41,
+      "originalPrice": 54,
+      "color": ["#cd5c5c", "#daa520", "#e9967a", "#fff8dc"],
+      "size": []
+    },
+    {
+      "id": 9,
+      "name": "Fashion High Heels Boots",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/y1_grande.png?v=1640740693",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/y2_360x.png?v=1640740693",
+      "disCount": 30,
+      "originalPrice": 47,
+      "color": [],
+      "size": ["S", "M", "L", "XL"]
+    },
+    {
+      "id": 10,
+      "name": "Fashion High Heels Shoes",
+      "image": "https://gougi-demo.myshopify.com/cdn/shop/products/87090532_07_D41_grande.png?v=1640740797",
+      "imageHover": "https://gougi-demo.myshopify.com/cdn/shop/products/87090532_071_360x.png?v=1640740797",
+      "disCount": 25,
+      "originalPrice": 289,
+      "color": ["#b8860b", "#ffffff"],
+      "size": ["S", "M", "L"]
+    }
+  ],
+  "carts": [
+    {
+      "idUser": "5ca2dbaa-c6f8-448a-b41a-5f5248a55b81",
+      "cartsItemId": "9d895685-3ae0-4607-9a28-273c822e3920"
+    },
+    {
+      "idUser": "6b75a436-0d25-4c02-b7b6-b88bd34454eb",
+      "cartsItemId": "0149147f-e1f1-4ade-a575-a34dbfaa902f"
+    },
+    {
+      "idUser": "900fc266-cfe8-4db9-9750-85f7edb11467",
+      "cartsItemId": "8f35a493-8c43-4b75-a9b2-ee993445090d"
+    }
+  ],
+  "cartsItem": [
+    {
+      "cartsItemId": "9d895685-3ae0-4607-9a28-273c822e3920",
+      "items": [
+        { "id": 1, "quantity": 1 },
+        { "id": 2, "quantity": 1 },
+        { "id": 7, "quantity": 1 }
+      ]
+    },
+    {
+      "cartsItemId": "0149147f-e1f1-4ade-a575-a34dbfaa902f",
+      "items": [
+        { "id": 1, "quantity": 2 },
+        { "id": 6, "quantity": 1 },
+        { "id": 7, "quantity": 1 }
+      ]
+    },
+    {
+      "cartsItemId": "8f35a493-8c43-4b75-a9b2-ee993445090d",
+      "items": [
+        { "id": 2, "quantity": 2 },
+        { "id": 3, "quantity": 4 }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "idUser": "5ca2dbaa-c6f8-448a-b41a-5f5248a55b81",
+      "email": "caosonhai1410@gmail.com",
+      "password": "$2b$10$IPkmVdjTIZ3vMENeNzF7keSuEWYTDeCnACs32dLzYCtqxSvwbUuya"
+    },
+    {
+      "idUser": "6b75a436-0d25-4c02-b7b6-b88bd34454eb",
+      "email": "hai1410@gmail.com",
+      "password": "$2b$10$DNncoSgNVptCENSGoxUAxuMVlQt.SKZiKi.MdN4FQhZZW4NfLdmRa"
+    },
+    {
+      "idUser": "900fc266-cfe8-4db9-9750-85f7edb11467",
+      "email": "tien@gmail.com",
+      "password": "$2b$10$f0aTr4o2EKTN6gcOJkowR.Er0RNqKKv0FghS1I.SX7tH88NIwq9fe"
+    }
+  ]
+}

@@ -1,11 +1,12 @@
 const express = require("express");
 const {
   addToCart,
-  getCart,
+  getCartsItem,
   removeItem,
   updateItem,
-} = require("../controllers/cart.controller");
-const { getProducts } = require("../controllers/product.controller");
+  createCartsItem,
+} = require("../controllers/cartsItem.controller");
+const { getProducts } = require("../controllers/products.controller");
 const { checkData } = require("../middlewares/checkData");
 const {
   register,
@@ -13,9 +14,10 @@ const {
   logout,
   checkUserLogin,
 } = require("../controllers/users.controller");
-const { validBodyData } = require("../middlewares/checkEmailAndPass");
 const { authenToken } = require("../middlewares/authenToken");
 const { findCartItem } = require("../middlewares/findCartItem");
+const { validBodyData } = require("../middlewares/validBodyData");
+const { createCart, getCarts } = require("../controllers/cart.controller");
 
 const router = express.Router();
 
@@ -35,13 +37,37 @@ const fieldCheckLogin = ["email"];
 
 router.get("/products", checkData, getProducts);
 
-router.get("/carts", authenToken, checkData, findCartItem, getCart);
+router.get("/carts", authenToken, checkData, getCarts);
 
-router.post("/carts", authenToken, checkData, findCartItem, addToCart);
+router.post("/carts", authenToken, checkData, createCart);
 
-router.delete("/carts/:id", authenToken, checkData, findCartItem, removeItem);
+router.get("/carts-item", authenToken, checkData, findCartItem, getCartsItem);
 
-router.put("/carts/:id", authenToken, checkData, findCartItem, updateItem);
+router.post(
+  "/carts-item",
+  authenToken,
+  checkData,
+  findCartItem,
+  createCartsItem
+);
+
+router.post(
+  "/carts-item/add-to-cart",
+  authenToken,
+  checkData,
+  findCartItem,
+  addToCart
+);
+
+router.delete(
+  "/carts-item/:id",
+  authenToken,
+  checkData,
+  findCartItem,
+  removeItem
+);
+
+router.put("/carts-item/:id", authenToken, checkData, findCartItem, updateItem);
 
 router.post(
   "/register",

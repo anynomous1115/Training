@@ -1,5 +1,7 @@
-const getProducts = (req, res) => {
-  const { products } = req.data;
+const { getProductsService } = require("../services/products.service");
+
+const getProducts = async (req, res) => {
+  const products = await getProductsService();
   try {
     res.status(200).json(products);
   } catch (error) {

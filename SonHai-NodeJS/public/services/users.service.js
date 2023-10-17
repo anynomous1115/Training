@@ -27,7 +27,6 @@ const register = async (data) => {
       }
     })
     .catch((error) => {
-      console.log(error);
       console.log({ message: "co loi r" });
     });
 };
@@ -134,7 +133,7 @@ const checkUserLogIn = async () => {
     })
     .then((data) => {
       const emailUser = document.querySelector(".emailUser");
-      emailUser.textContent = data.email;
+      emailUser.textContent = data;
     })
     .catch((error) => {
       console.log("coa loi xay ra");

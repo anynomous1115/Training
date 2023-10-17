@@ -33,5 +33,5 @@ module.exports = {
   writeFileJson,
   getData,
   findInData,
-  findIndexInData
+  findIndexInData,
 };
