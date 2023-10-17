@@ -19,17 +19,26 @@ const getCartItemOfUserLoggedInService = (cartItemOfUserLoggedIn) => {
   }
 };
 
-const addToCartService = (checkReqBody, quantity, items) => {
+const addToCartService = async (checkReqBody, quantity, cartItem) => {
   try {
+    const data = await getData();
+    const { cartsItem } = data;
+    const cartItemOfUser = await findInData(
+      cartsItem,
+      "cartsItemId",
+      cartItem.cartsItemId
+    );
+
     const { id } = checkReqBody;
 
     const item = {
       id: id,
       quantity: quantity,
     };
+    const { items } = cartItemOfUser;
 
     items.push(item);
-    return item;
+    return { data, item };
   } catch (error) {
     console.log({ message: "Something went wrong!" });
   }

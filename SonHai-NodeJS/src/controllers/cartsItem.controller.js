@@ -13,7 +13,6 @@ const {
   findIndexInData,
   getData,
 } = require("../services/service");
-const { updateCartsItemData } = require("../services/updateCartsItemData");
 const { dataUpdate } = require("../services/updateNewData");
 
 const path = require("path");
@@ -54,10 +53,13 @@ const addToCart = async (req, res) => {
       res.status(404).json("San pham khong ton tai trong kho");
       return;
     } else {
-      const item = addToCartService(checkReqBody, quantity, items);
-
-      const newData = await updateCartsItemData(item, cartItem);
-      await writeFileJson(pathFileJson, JSON.stringify(newData));
+      const addToCartServiceData =await addToCartService(
+        checkReqBody,
+        quantity,
+        cartItem
+      );
+      const { data, item } = addToCartServiceData;
+      await writeFileJson(pathFileJson, JSON.stringify(data));
 
       const itemResponse = await findInData(items, "id", item.id);
 

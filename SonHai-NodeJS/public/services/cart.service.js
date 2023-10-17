@@ -257,9 +257,9 @@ const addToCart = async (id) => {
           overLay.style.display = "none";
 
           showSuccessToastWithAutoHide("Bạn chưa đăng nhập!", "#db4444");
-          // setTimeout(() => {
-          //   window.location.href = "/login";
-          // }, 1000);
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 1000);
         }
       })
       .catch((error) => {

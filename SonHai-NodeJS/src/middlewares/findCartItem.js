@@ -1,7 +1,6 @@
 const { getCartsService } = require("../services/carts.service");
 const {
   getCartsItemService,
-  createCartsItemService,
 } = require("../services/cartsItem.service");
 const { findInData } = require("../services/service");
 
