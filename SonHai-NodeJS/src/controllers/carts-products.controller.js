@@ -32,15 +32,7 @@ const removeItem = async (req, res) => {
   try {
     const { id } = req.params;
     const { _id } = req.accessTokenVerify;
-    // const index = findIndexInData(items, "id", id);
-
-    // if (index == -1) {
-    //   res.status(404).json({
-    //     status: 404,
-    //     message: "The product does not exist in the shopping cart!",
-    //   });
-    //   return;
-    // } else {
+    
     const cartProduct = await removeItemService(id, _id);
     res.status(200).json(cartProduct);
   } catch (error) {
