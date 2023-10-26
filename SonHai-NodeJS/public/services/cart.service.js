@@ -1,5 +1,6 @@
 import { API_URL } from "../constants/api.js";
 import { cartState, productsState } from "../ui-global-state/state.js";
+import { handleCartItemUpdate } from "../utils/handleCartItemUpdate.js";
 import { showSuccessToastWithAutoHide } from "../utils/toast.js";
 
 const getCarts = async () => {
@@ -8,141 +9,42 @@ const getCarts = async () => {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
-
-    if (cartsResponse.status === 200) {
-      const cartItemsResponse = await fetch(`api/carts-item`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await cartItemsResponse.json();
-
-      console.log(data);
-      data.forEach((element) => {
-        const findProduct = productsState.find((i) => i.id == element.id);
-        if (findProduct !== undefined) {
-          cartState.push(element);
-        }
-      });
-    } else if (cartsResponse.status === 201) {
-      const createCartResponse = await fetch(`api/carts`, {
+    const cartData = await cartsResponse.json();
+    if (cartData.cart) {
+      await getCartProduct();
+    }
+    if (cartData.cart == null) {
+      const createCart = await fetch(`api/carts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
-
-      if (createCartResponse.ok) {
-        const createCartItemsResponse = await fetch(`api/carts-item`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-        if (createCartItemsResponse.ok) {
-          const cartItemsResponse = await fetch(`api/carts-item`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          });
-          const data = await cartItemsResponse.json();
-
-          console.log(data);
-          data.forEach((element) => {
-            const findProduct = productsState.find((i) => i.id == element.id);
-            if (findProduct !== undefined) {
-              cartState.push(element);
-            }
-          });
-        }
-      }
+      await createCart.json();
     }
   } catch (error) {
     console.log("Something went wrong", error);
   }
 };
-// const getCarts = async () => {
-//   await fetch(`api/carts`, {
-//     method: "GET",
-//     headers: { "Content-Type": "application/json" },
-//   }).then((res) => {
-//     console.log(res);
-//     if (res.ok) {
-//       fetch(`api/cart-item`, {
-//         method: "GET",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       })
-//         .then((res) => res.json())
-//         .then((data) => {
-//           console.log(data);
-//           data.forEach((element) => {
-//             const findProduct = productsState.find((i) => i.id == element.id);
-//             if (findProduct !== undefined) {
-//               cartState.push(element);
-//             }
-//           });
-//         })
-//         .catch((error) => {
-//           console.log("Something went wrong");
-//         });
-//     } else if (res.status === 404) {
-//       fetch(`api/carts`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }).then((res) => {
-//         if (res.ok) {
-//           fetch(`api/cart-item`, {
-//             method: "GET",
-//             headers: {
-//               "Content-Type": "application/json",
-//             },
-//           })
-//             .then((res) => res.json())
-//             .then((data) => {
-//               console.log(data);
-//               data.forEach((element) => {
-//                 const findProduct = productsState.find(
-//                   (i) => i.id == element.id
-//                 );
-//                 if (findProduct !== undefined) {
-//                   cartState.push(element);
-//                 }
-//               });
-//             })
-//             .catch((error) => {
-//               console.log("Something went wrong");
-//             });
-//         }
-//       });
-//     }
-//   });
-// };
 
-// const getCartsItem = async () => {
-//   await fetch(`api/cart-item`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   })
-//     .then((res) => res.json())
-//     .then((data) => {
-//       console.log(data);
-//       data.forEach((element) => {
-//         const findProduct = productsState.find((i) => i.id == element.id);
-//         if (findProduct !== undefined) {
-//           cartState.push(element);
-//         }
-//       });
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       console.log("Something went wrong");
-//     });
-// };
+const getCartProduct = async () => {
+  const getCartProductOfUser = await fetch(`api/carts-products`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const data = await getCartProductOfUser.json();
+
+  data.forEach((element) => {
+    const findProduct = productsState.find((i) => i._id == element.productID);
+    if (findProduct !== undefined) {
+      cartState.push(element);
+    }
+  });
+};
 
 const updateQuantityCartItem = async (id, num) => {
-  const index = cartState.findIndex((i) => i.id == id);
+  const index = cartState.findIndex((i) => i.productID == id);
   if (num == 1 || num == -1) {
-    await fetch(`api/carts-item/${id}`, {
+    await fetch(`api/carts-products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -155,7 +57,7 @@ const updateQuantityCartItem = async (id, num) => {
       console.log("Something went wrong");
     });
   } else {
-    await fetch(`api/carts-item/${id}`, {
+    await fetch(`api/carts-products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -164,15 +66,24 @@ const updateQuantityCartItem = async (id, num) => {
         id,
         quantity: (cartState[index].quantity = parseInt(num)),
       }),
-    }).catch((error) => {
-      console.log("Something went wrong");
-    });
+    })
+      .then((res) => {
+        if (res.status === 400) {
+          showSuccessToastWithAutoHide(
+            "Vui lòng nhập lại số lượng ",
+            "#db4444"
+          );
+        }
+      })
+      .catch((error) => {
+        console.log("Something went wrong");
+      });
   }
 };
 
 const deleteCartItem = async (id) => {
   const index = cartState.findIndex((i) => i.id == id);
-  await fetch(`api/carts-item/${id}`, {
+  await fetch(`api/carts-products/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -185,10 +96,10 @@ const deleteCartItem = async (id) => {
 };
 
 const addToCart = async (id) => {
-  const indexCartItem = cartState.findIndex((i) => i.id == id);
+  const indexCartItem = cartState.findIndex((i) => i.productID == id);
   if (indexCartItem !== -1) {
     cartState[indexCartItem].quantity += 1;
-    await fetch(`api/carts-item/${id}`, {
+    const updateWithAddToCart = await fetch(`api/carts-products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -197,36 +108,19 @@ const addToCart = async (id) => {
         id,
         quantity: cartState[indexCartItem].quantity,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return true;
-        } else if (res.status === 401) {
-          return false;
-        }
-      })
-      .then((data) => {
-        if (!data) {
-          const showCartItem = document.querySelector(".show-cart");
-          showCartItem.style.display = "none";
-          const overLay = document.querySelector(".cart__overlay");
-          overLay.style.display = "none";
-
-          showSuccessToastWithAutoHide("Bạn chưa đăng nhập!", "#db4444");
-          setTimeout(() => {
-            window.location.href = "/login";
-          }, 1000);
-        }
-      })
-      .catch((error) => {
-        console.log("Something went wrong");
-      });
+    });
+    if (updateWithAddToCart.ok) {
+      return true;
+    } else {
+      return handleCartItemUpdate(false);
+    }
   } else {
     // get /url/:id
     // post /url   body {username: "TTT"}
     // put /url/:id  body {username: "XXX"}
     // delete /url/:id
-    await fetch(`api//carts-item/add-to-cart`, {
+
+    const addToCartRes = await fetch(`api/carts-products/add-to-cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -235,43 +129,20 @@ const addToCart = async (id) => {
         id,
         quantity: 1,
       }),
-    })
-      .then(
-        cartState.push({
-          id,
-          quantity: 1,
-        })
-      )
-      .then((res) => {
-        if (res.ok) {
-          return true;
-        } else if (res.status === 401) {
-          return false;
-        }
-      })
-      .then((data) => {
-        if (!data) {
-          const showCartItem = document.querySelector(".show-cart");
-          showCartItem.style.display = "none";
-          const overLay = document.querySelector(".cart__overlay");
-          overLay.style.display = "none";
-
-          showSuccessToastWithAutoHide("Bạn chưa đăng nhập!", "#db4444");
-          setTimeout(() => {
-            window.location.href = "/login";
-          }, 1000);
-        }
-      })
-      .catch((error) => {
-        console.log("Something went wrong");
-      });
+    });
+    const response = await addToCartRes.json();
+    if (addToCartRes.status === 401) {
+      return handleCartItemUpdate(false);
+    }
+    cartState.push(response);
+    return cartState;
   }
 };
 
 const totalCartCalculator = () => {
   return cartState.reduce((previousValue, cartItem) => {
     const index = productsState.findIndex(
-      (product) => product.id == cartItem.id
+      (product) => product._id == cartItem.productID
     );
     previousValue += cartItem.quantity * productsState[index].currentPrice;
     return previousValue;
@@ -279,7 +150,6 @@ const totalCartCalculator = () => {
 };
 
 export {
-  // getCartsItem,
   getCarts,
   addToCart,
   updateQuantityCartItem,

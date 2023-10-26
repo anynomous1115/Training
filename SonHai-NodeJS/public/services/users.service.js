@@ -2,7 +2,7 @@ import { openCart } from "../ui-controllers/cart.controller.js";
 import { showSuccessToastWithAutoHide } from "../utils/toast.js";
 
 const register = async (data) => {
-  await fetch("/api/register", {
+  await fetch("/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const register = async (data) => {
 };
 
 const login = async (data) => {
-  await fetch("/api/login", {
+  await fetch("/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const login = async (data) => {
     });
 };
 const logout = async () => {
-  await fetch("/api/logout", {
+  await fetch("/api/auth/logout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const logout = async () => {
     });
 };
 const checkUserLogIn = async () => {
-  await fetch("/api/user", {
+  await fetch("/api/auth/user", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

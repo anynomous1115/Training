@@ -1,17 +1,13 @@
 
-POST http://localhost:3030/api/loginApi
+POST http://localhost:3030/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "caosonhai1410002@gmail.com",
+    "email": "caosonhai@gmail.com",
     "password": "Password123@"
 }
-
 ###
-POST http://localhost:3030/api/logoutApi
-
-###
-POST http://localhost:3030/api/registerApi
+POST http://localhost:3030/api/register
 Content-Type: application/json
 
 {

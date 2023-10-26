@@ -103,10 +103,10 @@ const addToCartEvent = () => {
   const btn_addToCart = document.querySelectorAll(".add-to-cart");
 
   btn_addToCart.forEach((element) => {
-    element.addEventListener("click", () => {
+    element.addEventListener("click", async () => {
       openCart(true);
       const id = element.getAttribute("data-id");
-      addToCart(id);
+      await addToCart(id);
       showCart();
     });
   });
@@ -142,17 +142,17 @@ function showProduct() {
                             <a href="" class="quick-view">
                                 Quick View
                             </a>
-                            <button data-id="${item.id}" class="add-to-cart">
+                            <button data-id="${item._id}" class="add-to-cart">
                                     Add To Cart
                             </button>
                         </div>
                         <div class="size">
-                        ${showSize(item.size)}
+                        ${showSize(item.sizes)}
                         </div>
                     </div>
                     <div class="img-desc">
                         <h3 class="name">
-                            <a href="">${item.name}</a>
+                            <a href="">${item.productName}</a>
                         </h3>
                         <div class="price">
                             <span class="current">
@@ -163,7 +163,7 @@ function showProduct() {
                             </span>
                         </div>
                         <div class="color-product">
-                            ${showColor(item.color)}
+                            ${showColor(item.colors)}
                         </div>
                     </div>
                     </div>

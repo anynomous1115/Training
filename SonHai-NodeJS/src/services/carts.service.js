@@ -1,18 +1,12 @@
-const { v4: uuidv4 } = require("uuid");
+const Cart = require("../models/carts.model");
 
-const { getData } = require("./service");
-
-const getCartsService = async () => {
-  const data = await getData();
-  const { carts } = data;
-  return carts;
+const getCartsService = async (userID) => {
+  const cart = await Cart.findOne({ userID });
+  return cart;
 };
 
-const createCartService = async (idUser) => {
-  const cart = {
-    idUser: idUser,
-    cartsItemId: uuidv4(),
-  };
+const createCartService = async (userID) => {
+  const cart = await Cart.create({ userID });
   return cart;
 };
 module.exports = {
