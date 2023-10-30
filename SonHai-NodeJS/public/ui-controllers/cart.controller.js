@@ -1,10 +1,11 @@
-import { cartState } from "../ui-global-state/state.js";
+import { cartState, productsState } from "../ui-global-state/state.js";
 import {
   updateQuantityCartItem,
   deleteCartItem,
   totalCartCalculator,
 } from "../services/cart.service.js";
 import { getProductById } from "../utils/findById.js";
+import { orderSevice } from "../services/order.service.js";
 
 // Tạo function openCart(true) | openCart(false)
 
@@ -107,6 +108,14 @@ const showTotalCard = () => {
   subtotalPrice.innerText = "$" + totalCartCalculator().toFixed(2);
 };
 
+const checkoutEvent = () => {
+  const checkout = document.querySelector("#check-out");
+  checkout.addEventListener("click", async (e) => {
+    e.preventDefault(); // Ngăn chặn việc gửi biểu mẫu
+    await orderSevice();
+  });
+};
+
 const showCart = () => {
   const cartColum = document.querySelector(".cart-colum");
   const mapCart = cartState.map((cartItem) => {
@@ -143,6 +152,7 @@ const showCart = () => {
   updateQuantityEvent();
   inputChangeEvent();
   showTotalCard();
+  checkoutEvent();
 };
 
 export { showCart, openCart, cartEvent };

@@ -3,58 +3,47 @@ const Cart = require("../models/carts.model");
 const Product = require("../models/products.model");
 
 const getCartItemOfUserLoggedInService = async (userID) => {
-  try {
-    const cart = await Cart.findOne({ userID });
-    const catsProductsOfUser = await CartProduct.find({ cartID: cart._id });
-    if (!catsProductsOfUser) {
-      res.status(404).json({
-        status: 404,
-        message: "The product does not exist in the shopping cart!",
-      });
-      return;
-    }
-    return catsProductsOfUser;
-  } catch (error) {
-    console.log({ message: "Something went wrong! cartsItem" });
+  const cart = await Cart.findOne({ userID });
+  const catsProductsOfUser = await CartProduct.find({ cartID: cart._id });
+  if (!catsProductsOfUser) {
+    throw new Error("The product does not exist in the shopping cart!");
   }
+  return catsProductsOfUser;
 };
 
-const addToCartService = async (productID, quantityProd, userID) => {
+const addToCartService = async (
+  productID,
+  quantityProd,
+  currentPrice,
+  userID
+) => {
   const cart = await Cart.findOne({ userID });
   const productCheck = await Product.findOne({ _id: productID });
   if (!productCheck) {
-    console.log("The product does not exist in stock!");
-    return;
+    throw new Error("The product does not exist in stock!");
   }
 
   const cartProduct = {
     cartID: cart._id,
     productID: productID,
     quantity: quantityProd,
+    currentPrice: currentPrice,
   };
   const cartsProductsCreate = await CartProduct.create(cartProduct);
   return cartsProductsCreate;
 };
 
 const removeItemService = async (reqParamsID, userID) => {
-  try {
-    const cart = await Cart.findOne({ userID });
+  const cart = await Cart.findOne({ userID });
 
-    const cartProduct = await CartProduct.findOneAndDelete({
-      cartID: cart._id,
-      productID: reqParamsID,
-    });
-    if (!cartProduct) {
-      console.log({
-        status: 404,
-        message: "The product does not exist in the shopping cart!",
-      });
-      return;
-    }
-    return cartProduct;
-  } catch (error) {
-    console.log({ message: "Something went wrong!" });
+  const cartProduct = await CartProduct.findOneAndDelete({
+    cartID: cart._id,
+    productID: reqParamsID,
+  });
+  if (!cartProduct) {
+    throw new Error("The product does not exist in the shopping cart!");
   }
+  return cartProduct;
 };
 
 const updateItemService = async (productID, quantityProd, userID) => {

@@ -1,5 +1,6 @@
 import { API_URL } from "../constants/api.js";
 import { cartState, productsState } from "../ui-global-state/state.js";
+import { getProductById } from "../utils/findById.js";
 import { handleCartItemUpdate } from "../utils/handleCartItemUpdate.js";
 import { showSuccessToastWithAutoHide } from "../utils/toast.js";
 
@@ -96,6 +97,7 @@ const deleteCartItem = async (id) => {
 };
 
 const addToCart = async (id) => {
+  const product = getProductById(id);
   const indexCartItem = cartState.findIndex((i) => i.productID == id);
   if (indexCartItem !== -1) {
     cartState[indexCartItem].quantity += 1;
@@ -128,6 +130,7 @@ const addToCart = async (id) => {
       body: JSON.stringify({
         id,
         quantity: 1,
+        currentPrice: product.currentPrice,
       }),
     });
     const response = await addToCartRes.json();

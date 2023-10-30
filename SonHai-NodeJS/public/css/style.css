@@ -328,7 +328,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--white);
-  padding: 0 1rem 4rem 1rem;
+  padding: 0 1rem 5rem 1rem;
 }
 
 .cart .title-cart {
@@ -414,16 +414,12 @@ body {
 .cart .cart-btn {
   position: fixed;
   bottom: 0;
-  left: 0;
-  background-color: var(--black-5);
+  background-color: var(--white);
   width: 100%;
-  height: 3rem;
 }
 
 .cart .cart-btn .subtotal {
   display: flex;
-  padding-top: 0.75rem;
-  padding-left: 1rem;
 }
 
 .cart .cart-btn .subtotal .subtotal-text {
@@ -435,7 +431,21 @@ body {
   font-size: 1.2rem;
   text-align: center;
 }
-
+.cart .cart-btn .btn-checkout{
+  padding-right: 2rem;
+}
+.cart .cart-btn .btn-checkout a{
+  text-decoration: none;
+  color: var(--white);
+  background-color: var(--black-95);
+  padding: 1rem 4rem;
+  font-size: 1.25rem;
+}
+.cart .cart-btn .cart-btn-wrap{
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
 .cart .remove {
   margin-left: 1rem;
 }

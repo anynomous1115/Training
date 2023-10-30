@@ -11,20 +11,25 @@ const getCartsProducts = async (req, res) => {
     const catsProductsOfUser = await getCartItemOfUserLoggedInService(_id);
     res.status(200).json(catsProductsOfUser);
   } catch (error) {
-    res.status(400).json({ status: 500, message: "Cannot get user's cart!" });
+    res.status(400).json({ status: 500, message: error.message ||"Cannot get user's cart!" });
   }
 };
 
 const addToCart = async (req, res) => {
   try {
-    const { id, quantity } = req.body;
+    const { id, quantity, currentPrice } = req.body;
+
     const { _id } = req.accessTokenVerify;
 
-    const itemCart = await addToCartService(id, quantity, _id);
-    console.log(itemCart);
+    const itemCart = await addToCartService(id, quantity, currentPrice, _id);
     res.status(201).json(itemCart);
   } catch (error) {
-    res.status(500).json({ status: 500, message: "Cannot add to cart!" });
+    res
+      .status(500)
+      .json({
+        status: 500,
+        message: error.message || "Cannot add to cart",
+      });
   }
 };
 
@@ -32,11 +37,11 @@ const removeItem = async (req, res) => {
   try {
     const { id } = req.params;
     const { _id } = req.accessTokenVerify;
-    
+
     const cartProduct = await removeItemService(id, _id);
     res.status(200).json(cartProduct);
   } catch (error) {
-    res.status(500).json({ status: 500, message: "Cannot delete cart item!" });
+    res.status(500).json({ status: 500, message: error.message ||"Cannot delete cart item!" });
   }
 };
 
@@ -58,7 +63,7 @@ const updateItem = async (req, res) => {
     console.log(error);
     res
       .status(500)
-      .json({ status: 500, message: "Unable to update item quantity!" });
+      .json({ status: 500, message: error.message ||"Unable to update item quantity!" });
   }
 };
 

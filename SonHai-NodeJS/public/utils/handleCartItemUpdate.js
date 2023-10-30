@@ -1,3 +1,5 @@
+import { showSuccessToastWithAutoHide } from "./toast.js";
+
 const handleCartItemUpdate = (isUpdated) => {
   if (!isUpdated) {
     const showCartItem = document.querySelector(".show-cart");

@@ -1,0 +1,137 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Urbanist", sans-serif;
+  background-color: var(--white);
+}
+
+.container {
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.payment {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.payment .payment-title {
+  color: var(--black-95);
+}
+
+.payment .payment-title h3 {
+  font-size: 2.25rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.payment .payment-title ul {
+  margin-top: 0.75rem;
+  display: flex;
+  text-align: center;
+}
+
+.payment .payment-title ul li {
+  list-style: none;
+}
+
+.payment .payment-title ul a {
+  text-decoration: none;
+  color: var(--black-95);
+}
+.payment .payment-grid {
+  width: 100%;
+  margin-top: 2rem;
+}
+.payment .payment-grid .payment-grid-wrap-odrer {
+  margin: 1rem 0 0 0;
+  border: var(--black-20) solid 1px;
+  border-radius: 10px;
+  padding: 0 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.payment .payment-grid .payment-grid-title {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+.payment .payment-grid .payment-grid-title-left {
+  width: 50%;
+}
+.payment .payment-grid .payment-grid-title-right {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment .payment-grid .payment-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment .payment-item .product-infor {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+.payment .payment-item .product-description {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.payment .payment-item img {
+  width: 50%;
+}
+.payment .lines {
+  height: 1px;
+  width: 70%;
+  background-color: var(--black-20);
+  margin: 1rem 15%;
+}
+
+.payment .payment-wrap-delivery-address {
+  width: 100%;
+  border: var(--black-20) solid 1px;
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+.payment .payment-wrap-delivery-address .delivery-address-title {
+  display: flex;
+  align-items: center;
+}
+.payment .delivery-address-title h3 {
+  padding-left: 0.5rem;
+}
+.payment .delivery-address-infor {
+  padding: 0.5rem 0 0 1rem;
+}
+.payment .btn-pay {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.payment .btn-pay button{
+  padding: 1rem;
+  background-color: var(--black-95);
+  color: var(--white);
+  border-radius: 10px;
+  border: none;
+}

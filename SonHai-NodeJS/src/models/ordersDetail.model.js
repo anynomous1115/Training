@@ -12,6 +12,10 @@ const OrderDetailSchema = new mongoose.Schema({
     type: Number,
     require: true,
   },
+  currentPrice: {
+    type: Number,
+    require: true,
+  },
   subTotal: {
     type: Number,
     require: true,

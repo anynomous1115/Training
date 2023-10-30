@@ -8,6 +8,10 @@ const OrderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  status: {
+    type: String,
+    require: true,
+  },
 });
-const Order = mongoose.model("order", OrderSchema);
+const Order = mongoose.model("orders", OrderSchema);
 module.exports = Order;

@@ -19,7 +19,9 @@ const register = async (req, res) => {
       .status(200)
       .json({ status: 200, message: "User successfully created!" });
   } catch (error) {
-    res.status(500).json({ status: 500, message: "Registration failed!" });
+    res
+      .status(500)
+      .json({ status: 500, message: error.message || "Registration failed!" });
   }
 };
 
@@ -38,7 +40,9 @@ const login = async (req, res) => {
       accessToken,
     });
   } catch (error) {
-    res.status(500).json({ status: 500, message: "Login failed!" });
+    res
+      .status(500)
+      .json({ status: 500, message: error.message || "Login failed!" });
   }
 };
 
@@ -58,7 +62,9 @@ const checkUserLogin = async (req, res) => {
       res.status(400).json({ status: 400, message: "You are not logged in!" });
     }
   } catch (error) {
-    res.status(500).json({ status: 500, message: "Something went wrong!" });
+    res
+      .status(500)
+      .json({ status: 500, message: error.message || "Something went wrong!" });
   }
 };
 
