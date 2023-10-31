@@ -27,11 +27,13 @@ const getCarts = async (req, res) => {
       res.status(200).json({
         status: 200,
         cart: cart,
+        message: "Cart already exists",
       });
     } else {
       res.status(200).json({
         status: 200,
         cart: null,
+        message:"Cart does not exist",
       });
     }
   } catch (error) {

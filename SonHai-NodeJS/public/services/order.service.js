@@ -1,6 +1,6 @@
 import { showSuccessToastWithAutoHide } from "../utils/toast.js";
 
-const orderSevice = async () => {
+const orderService = async () => {
   try {
     const orderResponse = await fetch(`api/pay`, {
       method: "POST",
@@ -19,8 +19,10 @@ const getOrder = async () => {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  const getOrder = getOrderResponse.json();
-  return getOrder;
+  const getOrder = await getOrderResponse.json();
+  const { data } = getOrder;
+
+  return data;
 };
 
 const updateOrderStatusService = async (orderID) => {
@@ -45,4 +47,4 @@ const updateOrderStatusService = async (orderID) => {
   }
 };
 
-export { orderSevice, updateOrderStatusService,getOrder };
+export { orderService, updateOrderStatusService, getOrder };

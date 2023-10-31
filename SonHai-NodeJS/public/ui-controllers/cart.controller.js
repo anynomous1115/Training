@@ -5,7 +5,7 @@ import {
   totalCartCalculator,
 } from "../services/cart.service.js";
 import { getProductById } from "../utils/findById.js";
-import { orderSevice } from "../services/order.service.js";
+import { orderService } from "../services/order.service.js";
 
 // Tạo function openCart(true) | openCart(false)
 
@@ -112,7 +112,7 @@ const checkoutEvent = () => {
   const checkout = document.querySelector("#check-out");
   checkout.addEventListener("click", async (e) => {
     e.preventDefault(); // Ngăn chặn việc gửi biểu mẫu
-    await orderSevice();
+    await orderService();
   });
 };
 

@@ -33,8 +33,8 @@ const getCartProduct = async () => {
   });
 
   const data = await getCartProductOfUser.json();
-
-  data.forEach((element) => {
+  const { catsProductsOfUser } = data;
+  catsProductsOfUser.forEach((element) => {
     const findProduct = productsState.find((i) => i._id == element.productID);
     if (findProduct !== undefined) {
       cartState.push(element);
@@ -137,7 +137,7 @@ const addToCart = async (id) => {
     if (addToCartRes.status === 401) {
       return handleCartItemUpdate(false);
     }
-    cartState.push(response);
+    cartState.push(response.itemCart);
     return cartState;
   }
 };

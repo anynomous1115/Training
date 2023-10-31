@@ -5,7 +5,7 @@ const OrderDetail = require("../models/ordersDetail.model");
 const Product = require("../models/products.model");
 const User = require("../models/users.model");
 
-const getOrderSevice = async (order,userID) => {
+const getOrderService = async (order,userID) => {
   const orderDetail = await OrderDetail.find({ orderID: order._id });
   const products = await Product.find();
 
@@ -103,4 +103,4 @@ const statusUpdateService = async (orderID, userID) => {
   return;
 };
 
-module.exports = { paymentService, statusUpdateService, getOrderSevice };
+module.exports = { paymentService, statusUpdateService, getOrderService };

@@ -133,7 +133,7 @@ const checkUserLogIn = async () => {
     })
     .then((data) => {
       const emailUser = document.querySelector(".emailUser");
-      emailUser.textContent = data;
+      emailUser.textContent = data.email;
     })
     .catch((error) => {
       console.log("coa loi xay ra");

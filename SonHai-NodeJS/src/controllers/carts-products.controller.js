@@ -9,9 +9,16 @@ const getCartsProducts = async (req, res) => {
   try {
     const { _id } = req.accessTokenVerify;
     const catsProductsOfUser = await getCartItemOfUserLoggedInService(_id);
-    res.status(200).json(catsProductsOfUser);
+    res.status(200).json({
+      status: 200,
+      message: "Get all CartsProducts successful !",
+      catsProductsOfUser: catsProductsOfUser,
+    });
   } catch (error) {
-    res.status(400).json({ status: 500, message: error.message ||"Cannot get user's cart!" });
+    res.status(400).json({
+      status: 500,
+      message: error.message || "Cannot get user's cart!",
+    });
   }
 };
 
@@ -22,14 +29,16 @@ const addToCart = async (req, res) => {
     const { _id } = req.accessTokenVerify;
 
     const itemCart = await addToCartService(id, quantity, currentPrice, _id);
-    res.status(201).json(itemCart);
+    res.status(201).json({
+      status: 201,
+      message: "Add to cart successfully",
+      itemCart: itemCart,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        status: 500,
-        message: error.message || "Cannot add to cart",
-      });
+    res.status(500).json({
+      status: 500,
+      message: error.message || "Cannot add to cart",
+    });
   }
 };
 
@@ -39,9 +48,16 @@ const removeItem = async (req, res) => {
     const { _id } = req.accessTokenVerify;
 
     const cartProduct = await removeItemService(id, _id);
-    res.status(200).json(cartProduct);
+    res.status(200).json({
+      status: 200,
+      message: "Deleted successfully",
+      cartProduct: cartProduct,
+    });
   } catch (error) {
-    res.status(500).json({ status: 500, message: error.message ||"Cannot delete cart item!" });
+    res.status(500).json({
+      status: 500,
+      message: error.message || "Cannot delete cart item!",
+    });
   }
 };
 
@@ -56,14 +72,19 @@ const updateItem = async (req, res) => {
         .json({ status: 400, message: "The value of quantity is not correct" });
       return;
     }
-    const product = await updateItemService(id, quantity, _id);
+    const item = await updateItemService(id, quantity, _id);
 
-    res.status(200).json(product);
+    res.status(200).json({
+      status: 200,
+      message: "Updated quantity successfully",
+      item: item,
+    });
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .json({ status: 500, message: error.message ||"Unable to update item quantity!" });
+    res.status(500).json({
+      status: 500,
+      message: error.message || "Unable to update item quantity!",
+    });
   }
 };
 

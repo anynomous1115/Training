@@ -10,7 +10,8 @@ const getAllProducts = async () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      data.forEach((element) => {
+      const {products} = data
+      products.forEach((element) => {
         productsState.push(element);
       });
     })

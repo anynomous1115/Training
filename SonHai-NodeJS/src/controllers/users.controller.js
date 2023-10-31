@@ -31,13 +31,12 @@ const login = async (req, res) => {
     const { accessToken, ageToken } = await loginService({ email, password });
     res.cookie("access_token", accessToken, {
       httpOnly: true,
-      ageToken: ageToken,
+      maxAge: ageToken * 1000,
     });
 
     res.status(200).json({
       status: 200,
       message: "Logged in successfully!",
-      accessToken,
     });
   } catch (error) {
     res
@@ -57,7 +56,12 @@ const checkUserLogin = async (req, res) => {
   try {
     const isExistingUser = await checkUserLoginService(req.accessTokenVerify);
     if (isExistingUser) {
-      res.status(200).json(isExistingUser.email);
+      const{email}= isExistingUser
+      res.status(200).json({
+        status:200,
+        message:"You are logged in",
+        email:email
+      });
     } else {
       res.status(400).json({ status: 400, message: "You are not logged in!" });
     }
