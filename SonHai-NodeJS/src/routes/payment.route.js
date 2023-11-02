@@ -1,17 +1,16 @@
 const express = require("express");
 const {
-  payment,
-  statusUpdate,
+  paymentCreate,
+  statusUpdatePay,
   paymentGet,
 } = require("../controllers/payment.controller");
 const { authenToken } = require("../middlewares/authenToken");
-const { checkData } = require("../middlewares/checkData");
 const router = express.Router();
 
-router.get("/", authenToken, checkData, paymentGet);
+router.get("/", authenToken, paymentGet);
 
-router.post("/", authenToken, checkData, payment);
+router.post("/", authenToken, paymentCreate);
 
-router.put("/:id", authenToken, checkData, statusUpdate);
+router.put("/:id", authenToken, statusUpdatePay);
 
 module.exports = router;

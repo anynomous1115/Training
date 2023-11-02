@@ -1,27 +1,23 @@
+const { errResponse } = require("../helper/errResponse");
+const { errorHandler } = require("../helper/handleError");
+const { success } = require("../helper/success");
 const {
   registerService,
   loginService,
   checkUserLoginService,
-} = require("../services/users.sevice");
+} = require("../services/users.service");
 
 const register = async (req, res) => {
   const { email, password, rePassword } = req.body;
   try {
     if (rePassword !== password) {
-      res
-        .status(400)
-        .json({ status: 400, message: "Confirm Password is incorrect!" });
+      errResponse(res, 400, "Confirm Password is incorrect!");
       return;
     }
     await registerService({ email, password });
-
-    res
-      .status(200)
-      .json({ status: 200, message: "User successfully created!" });
+    success("User successfully created!", 200, res);
   } catch (error) {
-    res
-      .status(500)
-      .json({ status: 500, message: error.message || "Registration failed!" });
+    errorHandler(error, res, 500);
   }
 };
 
@@ -34,14 +30,9 @@ const login = async (req, res) => {
       maxAge: ageToken * 1000,
     });
 
-    res.status(200).json({
-      status: 200,
-      message: "Logged in successfully!",
-    });
+    success("Logged in successfully!", 200, res);
   } catch (error) {
-    res
-      .status(500)
-      .json({ status: 500, message: error.message || "Login failed!" });
+    errorHandler(error, res, 500);
   }
 };
 
@@ -49,26 +40,21 @@ const logout = async (req, res) => {
   return res
     .clearCookie("access_token")
     .status(200)
-    .json({ status: 200, message: "Successfully logged out!" });
+    .json({ code: 200, message: "Successfully logged out!" });
 };
 
 const checkUserLogin = async (req, res) => {
   try {
     const isExistingUser = await checkUserLoginService(req.accessTokenVerify);
     if (isExistingUser) {
-      const{email}= isExistingUser
-      res.status(200).json({
-        status:200,
-        message:"You are logged in",
-        email:email
-      });
+      const { email } = isExistingUser;
+      success("You are logged in", 200, res, email);
     } else {
-      res.status(400).json({ status: 400, message: "You are not logged in!" });
+      errResponse(res, 400, "You are not logged in!");
+      return;
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ status: 500, message: error.message || "Something went wrong!" });
+    errorHandler(error, res, 500);
   }
 };
 

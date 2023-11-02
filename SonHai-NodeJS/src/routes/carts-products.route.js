@@ -1,6 +1,5 @@
 const express = require("express");
 const { authenToken } = require("../middlewares/authenToken");
-const { checkData } = require("../middlewares/checkData");
 const {
   getCartsProducts,
   addToCart,
@@ -9,22 +8,12 @@ const {
 } = require("../controllers/carts-products.controller");
 const router = express.Router();
 
-router.get("/", authenToken, checkData, getCartsProducts);
+router.get("/", authenToken, getCartsProducts);
 
-router.post(
-  "/add-to-cart",
-  authenToken,
-  checkData,
-  addToCart
-);
+router.post("/:productID", authenToken, addToCart);
 
-router.delete(
-  "/:id",
-  authenToken,
-  checkData,
-  removeItem
-);
+router.delete("/:productID", authenToken, removeItem);
 
-router.put("/:id", authenToken, checkData, updateItem);
+router.put("/:productID", authenToken, updateItem);
 
 module.exports = router;

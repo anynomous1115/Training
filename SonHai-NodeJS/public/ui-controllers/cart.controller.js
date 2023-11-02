@@ -1,4 +1,4 @@
-import { cartState, productsState } from "../ui-global-state/state.js";
+import { cartState } from "../ui-global-state/state.js";
 import {
   updateQuantityCartItem,
   deleteCartItem,
@@ -147,7 +147,6 @@ const showCart = () => {
   });
 
   cartColum.innerHTML = result.join(" ");
-
   deleteCartEvent();
   updateQuantityEvent();
   inputChangeEvent();

@@ -1,7 +1,9 @@
+const { errorHandler } = require("../helper/handleError");
+const { success } = require("../helper/success");
 const {
-  paymentService,
-  statusUpdateService,
-  getOrderService,
+  createPaymentService,
+  statusUpdatePayService,
+  getPaymentService,
 } = require("../services/payment.service");
 
 let paymentOrder = null;
@@ -11,47 +13,34 @@ const paymentGet = async (req, res) => {
     const order = paymentOrder;
     const { _id } = req.accessTokenVerify;
 
-    const data = await getOrderService(order, _id);
-    res.status(200).json({
-      status: 200,
-      message: "Get all order successful !",
-      data: data,
-    });
+    const data = await getPaymentService(order, _id);
+    success("Get all order successful !", 200, res, data);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: 500, message: "Error has occurred" });
+    errorHandler(error, res, 500);
   }
 };
 
-const payment = async (req, res) => {
+const paymentCreate = async (req, res) => {
   try {
     const { _id } = req.accessTokenVerify;
 
-    const order = await paymentService(_id);
+    const order = await createPaymentService(_id);
     paymentOrder = order;
 
-    res.status(200).json({ status: 200, message: "Create order successfully" });
+    success("Create order successfully", 200, res);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: 500, message: "Error has occurred" });
+    errorHandler(error, res, 500);
   }
 };
-const statusUpdate = async (req, res) => {
+const statusUpdatePay = async (req, res) => {
   try {
     const { orderID } = req.body;
     const { _id } = req.accessTokenVerify;
-    await statusUpdateService(orderID, _id);
-    res.status(200).json({
-      status: 200,
-      message: "Payment successfully",
-    });
+    await statusUpdatePayService(orderID, _id);
+    success("Payment successfully", 200, res);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      status: 500,
-      message: "Error has occurred",
-    });
+    errorHandler(error, res, 500);
   }
 };
 
-module.exports = { payment, statusUpdate, paymentGet };
+module.exports = { paymentCreate, statusUpdatePay, paymentGet };

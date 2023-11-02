@@ -1,6 +1,5 @@
 const express = require("express");
 const { validBodyData } = require("../middlewares/validBodyData");
-const { checkData } = require("../middlewares/checkData");
 const {
   register,
   login,
@@ -26,19 +25,13 @@ const fieldCheckLogin = ["email"];
 router.post(
   "/register",
   validBodyData(registerSchema, fieldCheckRegister),
-  checkData,
   register
 );
 
-router.post(
-  "/login",
-  validBodyData(registerSchema, fieldCheckLogin),
-  checkData,
-  login
-);
+router.post("/login", validBodyData(registerSchema, fieldCheckLogin), login);
 
 router.post("/logout", authenToken, logout);
 
-router.get("/user", authenToken, checkData, checkUserLogin);
+router.get("/verify-login", authenToken, checkUserLogin);
 
 module.exports = router;

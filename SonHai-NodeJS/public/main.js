@@ -15,7 +15,6 @@ window.addEventListener("load", () => {
   async function main() {
     await getAllProducts();
     await checkUserLogIn();
-    // await getCartsItem();
     await getCarts();
     showProduct();
     cartEvent();
@@ -24,7 +23,6 @@ window.addEventListener("load", () => {
     menuEventLoggedIn();
     logoutEvent();
     menuEventNotLoggedIn();
-    // showPassword()
   }
 
   main();

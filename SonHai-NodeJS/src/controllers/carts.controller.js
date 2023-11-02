@@ -4,17 +4,16 @@ const {
   getCartsService,
   createCartService,
 } = require("../services/carts.service");
+const { errorHandler } = require("../helper/handleError");
+const { success } = require("../helper/success");
 
 const createCart = async (req, res) => {
   try {
     const { _id } = req.accessTokenVerify;
     await createCartService(_id);
-    res.status(200).json({ status: 200, message: "Create a successful cart!" });
+    success("Create a successful cart!", 200, res);
   } catch (error) {
-    res.status(500).json({
-      status: 500,
-      message: "Unable to create cart!",
-    });
+    errorHandler(error, res, 500);
   }
 };
 
@@ -24,23 +23,12 @@ const getCarts = async (req, res) => {
     const cart = await getCartsService(_id);
 
     if (cart) {
-      res.status(200).json({
-        status: 200,
-        cart: cart,
-        message: "Cart already exists",
-      });
+      success("Cart already exists", 200, res, cart);
     } else {
-      res.status(200).json({
-        status: 200,
-        cart: null,
-        message:"Cart does not exist",
-      });
+      success("Cart already exists", 200, res, null);
     }
   } catch (error) {
-    res.status(500).json({
-      status: 500,
-      message: "Failed to retrieve cart data!",
-    });
+    errorHandler(error, res, 500);
   }
 };
 

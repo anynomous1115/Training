@@ -85,7 +85,7 @@ const logout = async () => {
     });
 };
 const checkUserLogIn = async () => {
-  await fetch("/api/auth/user", {
+  await fetch("/api/auth/verify-login", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -131,9 +131,9 @@ const checkUserLogIn = async () => {
         `;
       }
     })
-    .then((data) => {
+    .then((result) => {
       const emailUser = document.querySelector(".emailUser");
-      emailUser.textContent = data.email;
+      emailUser.textContent = result.data;
     })
     .catch((error) => {
       console.log("coa loi xay ra");

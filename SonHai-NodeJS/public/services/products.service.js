@@ -9,9 +9,9 @@ const getAllProducts = async () => {
     },
   })
     .then((res) => res.json())
-    .then((data) => {
-      const {products} = data
-      products.forEach((element) => {
+    .then((result) => {
+      const {data} = result
+      data.forEach((element) => {
         productsState.push(element);
       });
     })

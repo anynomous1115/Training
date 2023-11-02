@@ -5,7 +5,7 @@ const OrderDetail = require("../models/ordersDetail.model");
 const Product = require("../models/products.model");
 const User = require("../models/users.model");
 
-const getOrderService = async (order,userID) => {
+const getPaymentService = async (order, userID) => {
   const orderDetail = await OrderDetail.find({ orderID: order._id });
   const products = await Product.find();
 
@@ -14,7 +14,7 @@ const getOrderService = async (order,userID) => {
   return { orderDetail, products, email, order };
 };
 
-const paymentService = async (userID) => {
+const createPaymentService = async (userID) => {
   const order = await Order.create({
     userID: userID,
     status: "Dang cho thanh toan!!",
@@ -38,33 +38,7 @@ const paymentService = async (userID) => {
   return order;
 };
 
-// const statusUpdateService = async (orderID, userID) => {
-//   const order = await Order.findOne({ _id: orderID });
-//   order.status = "Da thanh toan thanh cong";
-//   await order.save();
-
-//   const cart = await Cart.findOne({ userID: userID });
-//   const cartProduct = await CartProduct.find({ cartID: cart._id });
-//   const orderDetail = await OrderDetail.find({ orderID: order._id });
-
-//   orderDetail.forEach((itemOrder) => {
-//     for(const itemCart of cartProduct){
-//       if (itemOrder.productID == itemCart.productID) {
-//         if (itemOrder.quantity == itemCart.quantity) {
-//           await CartProduct.deleteOne({
-//             productID: itemCart.productID,
-//             cartID: itemCart.cartID,
-//           });
-//         } else if (itemCart.quantity > itemOrder.quantity) {
-//           itemCart.quantity = itemCart.quantity - itemOrder.quantity;
-//           await cartProduct.save();
-//         }
-//       }
-//     }
-//   });
-//   return;
-// };
-const statusUpdateService = async (orderID, userID) => {
+const statusUpdatePayService = async (orderID, userID) => {
   const order = await Order.findOne({ _id: orderID });
   order.status = "Da thanh toan thanh cong";
   await order.save();
@@ -85,22 +59,12 @@ const statusUpdateService = async (orderID, userID) => {
       cartProductItem.quantity = cartProductItem.quantity - itemOrder.quantity;
       await cartProductItem.save();
     }
-
-    // for (const itemCart of cartProduct) {
-    //   if (itemOrder.productID == itemCart.productID) {
-    //     if (itemOrder.quantity == itemCart.quantity) {
-    //       await CartProduct.deleteOne({
-    //         productID: itemCart.productID,
-    //         cartID: itemCart.cartID,
-    //       });
-    //     } else if (itemCart.quantity > itemOrder.quantity) {
-    //       itemCart.quantity = itemCart.quantity - itemOrder.quantity;
-    //       await itemCart.save();
-    //     }
-    //   }
-    // }
   }
   return;
 };
 
-module.exports = { paymentService, statusUpdateService, getOrderService };
+module.exports = {
+  createPaymentService,
+  statusUpdatePayService,
+  getPaymentService,
+};

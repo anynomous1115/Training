@@ -1,3 +1,5 @@
+const { errResponse } = require("../helper/errResponse");
+
 const validBodyData = (schema, fieldCheck) => (req, res, next) => {
   const body = req.body;
   const { email, password } = body;
@@ -7,14 +9,14 @@ const validBodyData = (schema, fieldCheck) => (req, res, next) => {
   } else {
     fieldCheck.forEach((element) => {
       if (typeof body[element] !== typeof schema[element].type) {
-        res.status(400).json({ status: 400, message: `Invalid ${element}` });
+        errResponse(res, 400, `Invalid ${element}`);
         hasError = true;
         return;
       }
 
       const isValid = schema[element].regex.test(body[element]);
       if (!isValid) {
-        res.status(400).json({ status: 400, message: `Invalid ${element}` });
+        errResponse(res, 400, `Invalid ${element}`);
         hasError = true;
         return;
       }

@@ -27,7 +27,7 @@ POST  http://localhost:3030/api/carts-products/add-to-cart
 Content-Type: application/json
 
 {
-    "id":1,
+    "id":123,
     "quantity":2,
     "currentPrice":34 
 }

@@ -35,7 +35,7 @@ const addToCartService = async (
 
 const removeItemService = async (reqParamsID, userID) => {
   const cart = await Cart.findOne({ userID });
-
+  console.log(reqParamsID);
   const cartProduct = await CartProduct.findOneAndDelete({
     cartID: cart._id,
     productID: reqParamsID,
