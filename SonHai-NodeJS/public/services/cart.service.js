@@ -6,7 +6,7 @@ import { showSuccessToastWithAutoHide } from "../utils/toast.js";
 
 const getCarts = async () => {
   try {
-    const cartsResponse = await fetch(`api/carts`, {
+    const cartsResponse = await fetch(`api/v1/carts`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -16,7 +16,7 @@ const getCarts = async () => {
       await getCartProduct();
     }
     if (cartData.data == null) {
-      const createCart = await fetch(`api/carts`, {
+      const createCart = await fetch(`api/v1/carts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
@@ -28,7 +28,7 @@ const getCarts = async () => {
 };
 
 const getCartProduct = async () => {
-  const getCartProductOfUser = await fetch(`api/carts-products`, {
+  const getCartProductOfUser = await fetch(`api/v1/carts-products`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -45,9 +45,10 @@ const getCartProduct = async () => {
 
 const updateQuantityCartItem = async (id, num) => {
   const index = cartState.findIndex((i) => i.productID == id);
+  const { _id } = cartState[index];
 
   if (num == 1 || num == -1) {
-    await fetch(`api/carts-products/${id}`, {
+    await fetch(`api/v1/carts-products/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +61,7 @@ const updateQuantityCartItem = async (id, num) => {
       console.log("Something went wrong");
     });
   } else {
-    await fetch(`api/carts-products/${id}`, {
+    await fetch(`api/v1/carts-products/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -86,12 +87,15 @@ const updateQuantityCartItem = async (id, num) => {
 
 const deleteCartItem = async (id) => {
   const index = cartState.findIndex((i) => i.productID == id);
-
-  await fetch(`api/carts-products/${id}`, {
+  const { _id } = cartState[index];
+  await fetch(`api/v1/carts-products/${_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({
+      productID: id,
+    }),
   })
     .then(cartState.splice(index, 1))
     .catch((error) => {
@@ -102,10 +106,11 @@ const deleteCartItem = async (id) => {
 const addToCart = async (id) => {
   const product = getProductById(id);
   const indexCartItem = cartState.findIndex((i) => i.productID == id);
-
+  
   if (indexCartItem !== -1) {
+    const { _id } = cartState[indexCartItem];
     cartState[indexCartItem].quantity += 1;
-    const updateWithAddToCart = await fetch(`api/carts-products/${id}`, {
+    const updateWithAddToCart = await fetch(`api/v1/carts-products/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +131,7 @@ const addToCart = async (id) => {
     // put /url/:id  body {username: "XXX"}
     // delete /url/:id
 
-    const addToCartRes = await fetch(`api/carts-products/${id}`, {
+    const addToCartRes = await fetch(`api/v1/carts-products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

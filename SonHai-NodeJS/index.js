@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/api", router);
+app.use("/api/v1", router);
 
 // route
 app.get("/", async (req, res) =>

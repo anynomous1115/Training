@@ -26,8 +26,9 @@ const loginService = async ({ email, password }) => {
   }
   const ageToken = 3600;
   const accessToken = jwt.sign(
-    { _id: user._id },
-    process.env.ACCESS_TOKEN_SECRET
+    { _id: user._id }, //data input
+    process.env.ACCESS_TOKEN_SECRET, //secret key-
+    { expiresIn: "1h" }, //expired time
   );
   return {
     accessToken,
@@ -47,3 +48,4 @@ module.exports = {
   loginService,
   checkUserLoginService,
 };
+

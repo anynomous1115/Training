@@ -1,5 +1,4 @@
-const { errorHandler } = require("../helper/handleError");
-const { success } = require("../helper/success");
+const { success, errorHandler } = require("../helper/response");
 const {
   getCartItemOfUserLoggedInService,
   addToCartService,
@@ -11,9 +10,9 @@ const getCartsProducts = async (req, res) => {
   try {
     const { _id } = req.accessTokenVerify;
     const catsProductsOfUser = await getCartItemOfUserLoggedInService(_id);
-    success("Get all CartsProducts successful !", 200, res, catsProductsOfUser);
+    success(res, catsProductsOfUser, "Get all CartsProducts successful !", 200);
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 
@@ -23,23 +22,23 @@ const addToCart = async (req, res) => {
 
     const { _id } = req.accessTokenVerify;
 
-    const itemCart = await addToCartService(id, quantity, currentPrice, _id);
-    success("Add to cart successfully", 201, res, itemCart);
+    const cartProduct = await addToCartService(id, quantity, currentPrice, _id);
+    success(res, cartProduct, "Add to cart successfully", 201);
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 
 const removeItem = async (req, res) => {
   try {
-    const { productID } = req.params;
+    const { productID } = req.body;
     const { _id } = req.accessTokenVerify;
 
     const cartProduct = await removeItemService(productID, _id);
-    success("Deleted successfully", 200, res, cartProduct);
+    success(res, cartProduct, "Deleted successfully", 200);
   } catch (error) {
     console.log(error);
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 
@@ -49,15 +48,13 @@ const updateItem = async (req, res) => {
 
     const { id, quantity } = req.body;
     if (typeof quantity !== "number") {
-      res
-        .status(400)
-        .json({ code: 400, message: "The value of quantity is not correct" });
+      errorHandler(res, "The value of quantity is not correct", 400);
       return;
     }
-    const item = await updateItemService(id, quantity, _id);
-    success("Updated quantity successfully", 200, res, item);
+    const cartProduct = await updateItemService(id, quantity, _id);
+    success(res, cartProduct, "Updated quantity successfully", 200);
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 

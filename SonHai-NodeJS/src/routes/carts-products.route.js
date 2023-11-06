@@ -10,10 +10,10 @@ const router = express.Router();
 
 router.get("/", authenToken, getCartsProducts);
 
-router.post("/:productID", authenToken, addToCart);
+router.post("/", authenToken, addToCart);
 
-router.delete("/:productID", authenToken, removeItem);
+router.delete("/:id", authenToken, removeItem);
 
-router.put("/:productID", authenToken, updateItem);
+router.put("/:id", authenToken, updateItem);
 
 module.exports = router;

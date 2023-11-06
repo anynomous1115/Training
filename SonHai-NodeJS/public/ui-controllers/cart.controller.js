@@ -8,7 +8,7 @@ import { getProductById } from "../utils/findById.js";
 import { orderService } from "../services/order.service.js";
 
 // Tạo function openCart(true) | openCart(false)
-
+console.log(cartState);
 const openCart = (isOpen) => {
   const showCartItem = document.querySelector(".show-cart");
   const cart = document.querySelector(".cart");

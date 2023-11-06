@@ -1,6 +1,4 @@
-const { errResponse } = require("../helper/errResponse");
-const { errorHandler } = require("../helper/handleError");
-const { success } = require("../helper/success");
+const { errorHandler, success } = require("../helper/response");
 const {
   registerService,
   loginService,
@@ -11,13 +9,13 @@ const register = async (req, res) => {
   const { email, password, rePassword } = req.body;
   try {
     if (rePassword !== password) {
-      errResponse(res, 400, "Confirm Password is incorrect!");
+      errorHandler(res, "Confirm Password is incorrect!", 400);
       return;
     }
     await registerService({ email, password });
-    success("User successfully created!", 200, res);
+    success(res, "User successfully created!", 200);
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 
@@ -29,10 +27,9 @@ const login = async (req, res) => {
       httpOnly: true,
       maxAge: ageToken * 1000,
     });
-
-    success("Logged in successfully!", 200, res);
+    success(res,{}, "Logged in successfully!", 200);
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 
@@ -48,13 +45,13 @@ const checkUserLogin = async (req, res) => {
     const isExistingUser = await checkUserLoginService(req.accessTokenVerify);
     if (isExistingUser) {
       const { email } = isExistingUser;
-      success("You are logged in", 200, res, email);
+      success(res, email, "You are logged in", 200);
     } else {
-      errResponse(res, 400, "You are not logged in!");
+      errorHandler(res, "You are not logged in!", 400);
       return;
     }
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 

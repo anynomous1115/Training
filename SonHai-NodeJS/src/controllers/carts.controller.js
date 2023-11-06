@@ -4,16 +4,15 @@ const {
   getCartsService,
   createCartService,
 } = require("../services/carts.service");
-const { errorHandler } = require("../helper/handleError");
-const { success } = require("../helper/success");
+const { success, errorHandler } = require("../helper/response");
 
 const createCart = async (req, res) => {
   try {
     const { _id } = req.accessTokenVerify;
-    await createCartService(_id);
-    success("Create a successful cart!", 200, res);
+    const cart = await createCartService(_id);
+    success(res, cart, "Create a successful cart!", 201);
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 
@@ -23,12 +22,13 @@ const getCarts = async (req, res) => {
     const cart = await getCartsService(_id);
 
     if (cart) {
-      success("Cart already exists", 200, res, cart);
+      success(res, cart, "Cart already exists", 200);
     } else {
       success("Cart already exists", 200, res, null);
+      success(res, null, "Cart does not exist", 200);
     }
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 

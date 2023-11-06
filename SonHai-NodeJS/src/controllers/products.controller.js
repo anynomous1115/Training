@@ -1,13 +1,12 @@
-const { errorHandler } = require("../helper/handleError");
-const { success } = require("../helper/success");
+const { success, errorHandler } = require("../helper/response");
 const { getProductsService } = require("../services/products.service");
 
 const getProducts = async (req, res) => {
   try {
     const products = await getProductsService();
-    success("Get all product successful !", 200,res, products);
+    success(res, products, "Get all product successful !");
   } catch (error) {
-    errorHandler(error, res, 500);
+    errorHandler(res, error.message, 500);
   }
 };
 

@@ -1,5 +1,5 @@
 import {
-  getOrder,
+  getOrdersDetail,
   updateOrderStatusService,
 } from "../services/order.service.js";
 
@@ -11,7 +11,7 @@ const updateOrderStatus = (orderID) => {
 };
 
 const showOrder = async () => {
-  const { orderDetail, products, email, order } = await getOrder();
+  const { orderDetail, products, email, order } = await getOrdersDetail();
   const paymentItemDOM = document.querySelector(".payment-item-wrap");
 
   const deliveryAddress = document.querySelector(

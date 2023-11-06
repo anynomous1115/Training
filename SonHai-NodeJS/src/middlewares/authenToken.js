@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 const { errResponse } = require("../helper/errResponse");
 
 const authenToken = async (req, res, next) => {
-  console.log("cookies", req.cookies);
   const accessToken = req.cookies.access_token;
+  console.log({accessToken});
   if (!accessToken) {
     errResponse(res, 401, "Not authorized to access this resource!");
     return;
