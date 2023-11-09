@@ -67,7 +67,7 @@ const getProductOnPage = async (req, res) => {
     successHandler(
       res,
       productsOnPage,
-      `Get all products on page ${page}, success`
+      `Get all products on page ${page}, success`,200
     );
   } catch (error) {
     errorHandler(res, "Bad Request !", 400, error.message);
