@@ -1,11 +1,16 @@
 const jwt = require("jsonwebtoken");
-const { errResponse } = require("../helper/errResponse");
+const { errorHandler } = require("../helper/response");
 
 const authenToken = async (req, res, next) => {
   const accessToken = req.cookies.access_token;
-  console.log({accessToken});
+  console.log({ accessToken });
   if (!accessToken) {
-    errResponse(res, 401, "Not authorized to access this resource!");
+    errorHandler(
+      res,
+      "Unauthorized !",
+      401,
+      "Not authorized to access this resource!"
+    );
     return;
   }
 
@@ -14,7 +19,12 @@ const authenToken = async (req, res, next) => {
     req.accessTokenVerify = data;
     next();
   } catch (error) {
-    errResponse(res, 401, "Not authorized to access this resource!");
+    errorHandler(
+      res,
+      "Unauthorized !",
+      401,
+      "Not authorized to access this resource!"
+    );
   }
 };
 module.exports = {

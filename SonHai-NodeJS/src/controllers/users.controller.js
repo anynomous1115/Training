@@ -1,4 +1,4 @@
-const { errorHandler, success } = require("../helper/response");
+const { errorHandler, successHandler } = require("../helper/response");
 const {
   registerService,
   loginService,
@@ -13,9 +13,9 @@ const register = async (req, res) => {
       return;
     }
     await registerService({ email, password });
-    success(res, "User successfully created!", 200);
+    successHandler(res, "User successfully created!", 200);
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 
@@ -27,9 +27,9 @@ const login = async (req, res) => {
       httpOnly: true,
       maxAge: ageToken * 1000,
     });
-    success(res,{}, "Logged in successfully!", 200);
+    successHandler(res, {}, "Logged in successfully!", 200);
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 
@@ -45,13 +45,13 @@ const checkUserLogin = async (req, res) => {
     const isExistingUser = await checkUserLoginService(req.accessTokenVerify);
     if (isExistingUser) {
       const { email } = isExistingUser;
-      success(res, email, "You are logged in", 200);
+      successHandler(res, email, "You are logged in", 200);
     } else {
       errorHandler(res, "You are not logged in!", 400);
       return;
     }
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 

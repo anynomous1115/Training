@@ -29,6 +29,7 @@ const loginService = async ({ email, password }) => {
     { _id: user._id }, //data input
     process.env.ACCESS_TOKEN_SECRET, //secret key-
     { expiresIn: "1h" }, //expired time
+    
   );
   return {
     accessToken,

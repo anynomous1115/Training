@@ -31,3 +31,18 @@ Content-Type: application/json
     "quantity":2,
     "currentPrice":34 
 }
+###
+POST http://localhost:3030/api/v1/products/6538941ada3cfdb75e682023/color
+Content-Type: application/json
+
+{
+    "colorName":"#ffff",
+    "productID":"6538941ada3cfdb75e682023"
+}
+###
+GET http://localhost:3030/api/v1/products/6538941ada3cfdb75e682023/color
+Content-Type: application/json
+
+{
+    "productID":"6538941ada3cfdb75e682023"
+}

@@ -1,4 +1,4 @@
-const { success, errorHandler } = require("../helper/response");
+const { successHandler, errorHandler } = require("../helper/response");
 const {
   getOrdersDetailService,
   createOrdersDetailService,
@@ -9,9 +9,9 @@ const getOrderDetail = async (req, res) => {
     const order = req.cookies.order;
     const { _id } = req.accessTokenVerify;
     const orderDetail = await getOrdersDetailService(order, _id);
-    success(res, orderDetail, "Get all ordersDetail successful !", 200);
+    successHandler(res, orderDetail, "Get all ordersDetail successful !", 200);
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 
@@ -24,9 +24,9 @@ const createOrdersDetail = async (req, res) => {
       httpOnly: true,
       maxAge: 3600 * 1000,
     });
-    success(res, orderDetail, "Create orderDetail successful !", 200);
+    successHandler(res, orderDetail, "Create orderDetail successful !", 200);
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 

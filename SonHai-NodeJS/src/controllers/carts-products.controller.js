@@ -1,4 +1,4 @@
-const { success, errorHandler } = require("../helper/response");
+const { successHandler, errorHandler } = require("../helper/response");
 const {
   getCartItemOfUserLoggedInService,
   addToCartService,
@@ -10,9 +10,14 @@ const getCartsProducts = async (req, res) => {
   try {
     const { _id } = req.accessTokenVerify;
     const catsProductsOfUser = await getCartItemOfUserLoggedInService(_id);
-    success(res, catsProductsOfUser, "Get all CartsProducts successful !", 200);
+    successHandler(
+      res,
+      catsProductsOfUser,
+      "Get all CartsProducts successful !",
+      200
+    );
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 
@@ -23,9 +28,9 @@ const addToCart = async (req, res) => {
     const { _id } = req.accessTokenVerify;
 
     const cartProduct = await addToCartService(id, quantity, currentPrice, _id);
-    success(res, cartProduct, "Add to cart successfully", 201);
+    successHandler(res, cartProduct, "Add to cart successfully", 201);
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 
@@ -35,10 +40,9 @@ const removeItem = async (req, res) => {
     const { _id } = req.accessTokenVerify;
 
     const cartProduct = await removeItemService(productID, _id);
-    success(res, cartProduct, "Deleted successfully", 200);
+    successHandler(res, cartProduct, "Deleted successfully", 200);
   } catch (error) {
-    console.log(error);
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 
@@ -52,9 +56,9 @@ const updateItem = async (req, res) => {
       return;
     }
     const cartProduct = await updateItemService(id, quantity, _id);
-    success(res, cartProduct, "Updated quantity successfully", 200);
+    successHandler(res, cartProduct, "Updated quantity successfully", 200);
   } catch (error) {
-    errorHandler(res, error.message, 500);
+    errorHandler(res, "Bad Request !", 400, error.message);
   }
 };
 

@@ -104,9 +104,9 @@ const addToCartEvent = () => {
 
   btn_addToCart.forEach((element) => {
     element.addEventListener("click", async () => {
-      openCart(true);
       const id = element.getAttribute("data-id");
       await addToCart(id);
+      openCart(true);
       showCart();
     });
   });

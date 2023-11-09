@@ -20,11 +20,6 @@ const ProductShema = new mongoose.Schema({
     type: Number,
     require: true,
   },
-  colors: [
-    {
-      type: String,
-    },
-  ],
   sizes: [
     {
       type: String,

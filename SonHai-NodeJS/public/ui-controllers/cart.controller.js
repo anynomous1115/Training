@@ -8,7 +8,6 @@ import { getProductById } from "../utils/findById.js";
 import { orderService } from "../services/order.service.js";
 
 // Tạo function openCart(true) | openCart(false)
-console.log(cartState);
 const openCart = (isOpen) => {
   const showCartItem = document.querySelector(".show-cart");
   const cart = document.querySelector(".cart");
@@ -18,7 +17,7 @@ const openCart = (isOpen) => {
     showCartItem.style.display = "block";
     cart.classList.add("cart__open");
     overLay.style.display = "block";
-    showCart();
+    showCart()
   } else {
     cart.classList.remove("cart__open");
     showCartItem.style.display = "none";
@@ -105,13 +104,17 @@ const inputChangeEvent = () => {
 
 const showTotalCard = () => {
   const subtotalPrice = document.querySelector(".subtotal-price");
+  console.log(subtotalPrice);
+
   subtotalPrice.innerText = "$" + totalCartCalculator().toFixed(2);
 };
 
 const checkoutEvent = () => {
   const checkout = document.querySelector("#check-out");
+  console.log(checkout);
   checkout.addEventListener("click", async (e) => {
     e.preventDefault(); // Ngăn chặn việc gửi biểu mẫu
+    console.log(123);
     await orderService();
   });
 };

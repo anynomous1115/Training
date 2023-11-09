@@ -8,7 +8,6 @@ const orderService = async () => {
     });
     const response = await orderResponse.json();
     const { data } = response;
-    console.log(response);
     if (orderResponse.ok) {
       const createOrdersDetailRes = await fetch(`api/v1/ordersDetail`, {
         method: "POST",
@@ -22,7 +21,10 @@ const orderService = async () => {
       }
     }
     if (response.message === "The shopping cart is empty") {
+      console.log(8947473874);
+
       showSuccessToastWithAutoHide("Gio hang dang trong", "#db4444");
+      return;
     }
   } catch (error) {
     console.log(error);
