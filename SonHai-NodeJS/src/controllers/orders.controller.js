@@ -19,8 +19,7 @@ const createOrders = async (req, res) => {
 const updateOrders = async (req, res) => {
   try {
     const { orderID } = req.body;
-    const { _id } = req.accessTokenVerify;
-    const order = await updateOrderService(orderID, _id);
+    const order = await updateOrderService(orderID);
     successHandler(res, order, "Payment successfully", 201);
   } catch (error) {
     errorHandler(res, "Bad Request !", 400, error.message);

@@ -1,15 +1,20 @@
-const errorHandler = (res, message, code, error) => {
-  res.status(code || 400).json({
-    error: error,
-    message: message || "Something went wrong, please access later !",
-    code: code || 400,
+const errorHandler = (
+  res,
+  message = "Something went wrong, please access later !",
+  code = 400,
+  error
+) => {
+  res.status(code).json({
+    error,
+    message,
+    code,
   });
 };
-const successHandler = (res, data, message, code) => {
-  res.status(code || 200).json({
+const successHandler = (res, data, message = "Successful", code = 200) => {
+  res.status(code).json({
     data: data,
-    message: message || "successful",
-    code: code || 200,
+    message: message,
+    code: code,
   });
 };
 module.exports = {

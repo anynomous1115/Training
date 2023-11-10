@@ -23,11 +23,11 @@ const getCartsProducts = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    const { id, quantity, currentPrice } = req.body;
+    const { productID, quantity, currentPrice } = req.body;
 
     const { _id } = req.accessTokenVerify;
 
-    const cartProduct = await addToCartService(id, quantity, currentPrice, _id);
+    const cartProduct = await addToCartService(productID, quantity, currentPrice, _id);
     successHandler(res, cartProduct, "Add to cart successfully", 201);
   } catch (error) {
     errorHandler(res, "Bad Request !", 400, error.message);
@@ -36,10 +36,8 @@ const addToCart = async (req, res) => {
 
 const removeItem = async (req, res) => {
   try {
-    const { productID } = req.body;
-    const { _id } = req.accessTokenVerify;
-
-    const cartProduct = await removeItemService(productID, _id);
+    const cartProductID = req.params.id
+    const cartProduct = await removeItemService(cartProductID);
     successHandler(res, cartProduct, "Deleted successfully", 200);
   } catch (error) {
     errorHandler(res, "Bad Request !", 400, error.message);
@@ -48,14 +46,12 @@ const removeItem = async (req, res) => {
 
 const updateItem = async (req, res) => {
   try {
-    const { _id } = req.accessTokenVerify;
-
-    const { id, quantity } = req.body;
+    const { cartProductID, quantity } = req.body;
     if (typeof quantity !== "number") {
       errorHandler(res, "The value of quantity is not correct", 400);
       return;
     }
-    const cartProduct = await updateItemService(id, quantity, _id);
+    const cartProduct = await updateItemService(cartProductID, quantity,);
     successHandler(res, cartProduct, "Updated quantity successfully", 200);
   } catch (error) {
     errorHandler(res, "Bad Request !", 400, error.message);

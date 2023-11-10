@@ -33,12 +33,9 @@ const addToCartService = async (
   return cartsProductsCreate;
 };
 
-const removeItemService = async (reqParamsID, userID) => {
-  const cart = await Cart.findOne({ userID });
-  console.log(reqParamsID);
+const removeItemService = async (cartProductID) => {
   const cartProduct = await CartProduct.findOneAndDelete({
-    cartID: cart._id,
-    productID: reqParamsID,
+    _id: cartProductID,
   });
   if (!cartProduct) {
     throw new Error("The product does not exist in the shopping cart!");
@@ -46,14 +43,12 @@ const removeItemService = async (reqParamsID, userID) => {
   return cartProduct;
 };
 
-const updateItemService = async (productID, quantityProd, userID) => {
-  const cart = await Cart.findOne({ userID });
-  const product = await CartProduct.findOne({
-    cartID: cart._id,
-    productID: productID,
+const updateItemService = async (cartProductID, quantity )=> {
+  const cartProduct = await CartProduct.findOne({
+    _id:cartProductID
   });
-  product.quantity = quantityProd;
-  return await product.save();
+  cartProduct.quantity = quantity;
+  return await cartProduct.save();
 };
 
 module.exports = {

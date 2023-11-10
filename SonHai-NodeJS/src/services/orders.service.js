@@ -19,6 +19,7 @@ const createOrderService = async (userID) => {
 };
 const updateOrderService = async (orderID) => {
   const order = await Order.findOne({ _id: orderID });
+  console.log(orderID);
   order.status = "Da thanh toan thanh cong";
   await order.save();
 
@@ -38,7 +39,7 @@ const updateOrderService = async (orderID) => {
       await cartProductItem.save();
     }
   }
-  return;
+  return order;
 };
 module.exports = {
   createOrderService,

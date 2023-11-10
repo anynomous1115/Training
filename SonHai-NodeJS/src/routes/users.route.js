@@ -32,6 +32,6 @@ router.post("/login", validBodyData(registerSchema, fieldCheckLogin), login);
 
 router.post("/logout", authenToken, logout);
 
-router.get("/verify-login", authenToken, checkUserLogin);
+router.get("/me", authenToken, checkUserLogin);
 
 module.exports = router;

@@ -9,11 +9,11 @@ const register = async (req, res) => {
   const { email, password, rePassword } = req.body;
   try {
     if (rePassword !== password) {
-      errorHandler(res, "Confirm Password is incorrect!", 400);
+      errorHandler(res, "Bad Request !", 400, "Confirm Password is incorrect!");
       return;
     }
     await registerService({ email, password });
-    successHandler(res, "User successfully created!", 200);
+    successHandler(res,{}, "User successfully created!", 200);
   } catch (error) {
     errorHandler(res, "Bad Request !", 400, error.message);
   }
